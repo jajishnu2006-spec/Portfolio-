@@ -284,7 +284,7 @@ a:focus-visible,
   display: flex;
   width: max-content;
   animation: marquee 40s linear infinite;
-  color: red;
+  color:black;
 }
 
 /* How the loop works:
