@@ -1,0 +1,1060 @@
+/* Put this at the very top of your CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box
+}
+:root {
+  /*--------------- Font Family ---------------*/
+  --ff-primary: "Inter", sans-serif;              /* body text, paragraphs */
+  --ff-secondary: "DM Sans", sans-serif;          /* nav, buttons, labels */
+  --ff-design: "Instrument Serif", serif;         /* elegant headings / italic accents */
+  --ff-brand: "Space Grotesk", sans-serif;        /*  name / logo */
+}
+
+:root {
+  /*--------------- Colours ---------------*/
+  --clr-bg: #FAFAF8;            /* page background (warm off-white) */
+  --clr-surface: #F1F0EC;       /* cards, sections */
+  --clr-border: #E4E2DD;        /* thin dividers, outlines */
+
+  --clr-text-primary: #111111;  /* headings */
+  --clr-text-secondary: #555555;/* body text */
+  --clr-text-muted: #8A8A8A;    /* captions, dates, labels */
+
+  --clr-accent: #2F4F3A;        /* links, buttons (deep forest green) */
+  --clr-accent-hover: #1E3527;  /* accent on hover */
+
+  --clr-white: #FFFFFF;
+  --clr-black: #0A0A0A;
+}
+
+/*--------------- Base ---------------*/
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ff-primary);
+  background-color: var(--clr-bg);
+  color: var(--clr-text-secondary);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--clr-accent);
+}
+
+a:focus-visible,
+#menu-toggle:focus-visible + .nav-btn {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Hides something visually but keeps it for screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  color: red;
+}
+
+/*--------------- Header / Navigation ---------------*/
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--clr-bg);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 3rem; /* always keep space between the name and the links */
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+}
+
+.brand {
+  padding: 0.4rem 0; /* taller tap area on phones */
+  font-family: var(--ff-brand);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--clr-text-primary);
+  text-decoration: none;
+}
+
+.nav-btn {
+  display: inline-flex;
+  padding: 6px; /* 32px icon + padding = 44px, a comfortable size to tap */
+  margin-right: -6px;
+  cursor: pointer;
+  color: var(--clr-accent);
+}
+
+.nav-btn svg {
+  fill: currentColor;
+}
+
+/* Mobile: links are hidden until the menu button is clicked */
+.nav-items {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  list-style: none;
+  padding: 0.5rem 0;
+}
+
+#menu-toggle:checked ~ .nav-items {
+  display: flex;
+}
+
+.nav-items a {
+  position: relative;
+  display: inline-block;
+  padding: 0.6rem 0;
+  font-family: var(--ff-secondary);
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  text-decoration: none;
+  background-color: transparent;
+  transition: color 0.2s;
+}
+
+/* Each link has its own hover colour */
+.nav-items li:nth-child(1) a { --hover-clr: #2F4F3A; } /* About: forest green */
+.nav-items li:nth-child(2) a { --hover-clr: #1F5F8B; } /* Experience: blue */
+.nav-items li:nth-child(3) a { --hover-clr: #8A5A00; } /* National Service: amber */
+.nav-items li:nth-child(4) a { --hover-clr: #B3261E; } /* Achievements: red */
+.nav-items li:nth-child(5) a { --hover-clr: #6B3FA0; } /* Education: purple */
+.nav-items li:nth-child(6) a { --hover-clr: #0F766E; } /* Contact: teal */
+
+.nav-items li:nth-child(1) a:hover {
+  background-color: yellow;
+} /* About: forest green */
+
+/* Underline in the same colour, sliding in from the left */
+.nav-items a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.3rem;
+  width: 100%;
+  height: 2px;
+  background-color: var(--hover-clr);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav-items a:hover,
+.nav-items a:focus-visible {
+  color: var(--hover-clr);
+}
+
+.nav-items a:hover::after,
+.nav-items a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Desktop: show the links in a row and hide the menu button
+   (1024px, not 768px, so the six links never squeeze up against the name) */
+@media (min-width: 1024px) {
+  .nav-btn {
+    display: none;
+  }
+
+  .nav-items {
+    display: flex;
+    flex-direction: row;
+    gap: 1.75rem;
+    width: auto;
+    padding: 0;
+  }
+
+  .nav-items a {
+    padding: 0;
+  }
+
+  .nav-items a::after {
+    bottom: -4px;
+  }
+}
+
+/*--------------- Buttons ---------------*/
+.btn {
+  display: inline-flex;
+  font-family: var(--ff-secondary);
+  font-weight: 500;
+  padding: 0.75rem 1.4rem;
+  border: 1px solid var(--clr-accent);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--clr-accent);
+  color: var(--clr-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--clr-accent-hover);
+  border-color: var(--clr-accent-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--clr-accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--clr-surface);
+}
+
+/*--------------- Hero ---------------*/
+.hero {
+  padding: 0 0 4rem; /* no top padding: the SUTD strip sits right under the menu bar */
+}
+
+.eyebrow,
+.card-label {
+  font-family: var(--ff-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+}
+
+/* Everything in the hero is centred on the page */
+.hero .container {
+  text-align: center;
+}
+
+.hero .tagline,
+.hero .hero-text {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .hero-actions {
+  justify-content: center;
+}
+
+.hero h1 {
+  font-family: var(--ff-brand);
+  font-size: clamp(2.5rem, 9vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--clr-text-primary);
+}
+
+/*--------------- Marquees ---------------*/
+/* Shared by the SUTD strip at the top and the email at the bottom.
+   Both run edge to edge across the page. */
+.marquee {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+  color: red;
+}
+
+/* How the loop works:
+   - attr(data-text) reads the text from the HTML, so it's only typed once.
+   - ::before and ::after are two identical copies placed side by side.
+   - The animation slides the track left by half (-50%), so copy 2 ends up exactly
+     where copy 1 started, and the jump back to the start can't be seen.
+   - Each copy repeats the text 4 times so it's wider than even a very wide screen. */
+.marquee-track::before,
+.marquee-track::after {
+  content: attr(data-text) var(--sep) attr(data-text) var(--sep)
+           attr(data-text) var(--sep) attr(data-text) var(--sep);
+  white-space: pre; /* keep the extra spaces around the star */
+}
+
+.marquee {
+  --sep: "   \2726   "; /* \2726 is the ✦ star */
+}
+
+/* The SUTD text is small, so it needs 6 repeats per copy to be wider than a big screen */
+.marquee-strip .marquee-track::before,
+.marquee-strip .marquee-track::after {
+  content: attr(data-text) var(--sep) attr(data-text) var(--sep) attr(data-text) var(--sep)
+           attr(data-text) var(--sep) attr(data-text) var(--sep) attr(data-text) var(--sep);
+}
+
+/* SUTD strip at the top of the hero */
+.marquee-strip {
+  margin-bottom: 4rem;
+  padding: 0.9rem 0;
+  font-family: var(--ff-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  border-top: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+/* Big clickable email in the contact section */
+.marquee-email {
+  margin-top: 2rem;
+  padding: 0.2em 0;
+  font-family: var(--ff-design);
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  line-height: 1.2;
+  color: var(--clr-accent);
+  text-decoration: none;
+}
+
+.marquee-email:hover {
+  color: var(--clr-accent-hover);
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Respect visitors who have turned on "reduce motion" on their device */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    padding-left: 1.25rem;
+  }
+
+  .marquee-track::after {
+    content: none; /* when it isn't moving, one copy is enough */
+  }
+}
+
+.full-name {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--clr-text-muted);
+}
+
+.tagline {
+  max-width: 24ch;
+  margin: 2rem 0 1rem;
+  font-family: var(--ff-design);
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--clr-text-primary);
+}
+
+.hero-text {
+  max-width: 60ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--clr-border);
+  list-style: none;
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--ff-brand);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--clr-text-primary);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+
+/*--------------- Sections ---------------*/
+.section {
+  padding: 4.5rem 0;
+  border-top: 1px solid var(--clr-border);
+}
+
+.section-alt {
+  background-color: var(--clr-surface);
+}
+
+/* Stops the sticky header from covering a section's title after clicking a nav link */
+section {
+  scroll-margin-top: 4rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+  font-family: var(--ff-design);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--clr-text-primary);
+}
+
+/*--------------- Icons ---------------*/
+/* The green tile beside each section heading */
+.section-icon {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.5rem;
+  color: var(--clr-white);
+  background-color: red;
+  border-radius: 12px;
+}
+
+.btn {
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn .material-symbols-outlined {
+  font-size: 1.2rem;
+}
+
+.about-grid h3 .material-symbols-outlined {
+  font-size: 1.15rem;
+  color: var(--clr-accent);
+}
+
+/*--------------- About ---------------*/
+.about-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.about-grid h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.tags li {
+  padding: 0.35rem 0.85rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.9rem;
+  color: var(--clr-text-primary);
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+}
+
+.plain-list {
+  list-style: none;
+}
+
+.plain-list li + li {
+  margin-top: 0.4rem;
+}
+
+cite {
+  color: var(--clr-text-primary);
+}
+
+/*--------------- Experience timeline ---------------*/
+.timeline {
+  margin-left: 0.4rem;
+  list-style: none;
+  border-left: 2px solid var(--clr-border);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 2.5rem 1.75rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* The dot on the line */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 0.4rem;
+  width: 12px;
+  height: 12px;
+  background-color: var(--clr-accent);
+  border: 2px solid var(--clr-bg);
+  border-radius: 50%;
+}
+
+.timeline-date {
+  font-family: var(--ff-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--clr-text-muted);
+}
+
+.timeline-item h3 {
+  margin-top: 0.15rem;
+  font-family: var(--ff-secondary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--clr-text-primary);
+}
+
+.org {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--clr-accent);
+}
+
+.timeline-item ul {
+  max-width: 65ch;
+  padding-left: 1.1rem;
+}
+
+.timeline-item ul li + li {
+  margin-top: 0.25rem;
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0; /* taller tap area on phones */
+  font-family: var(--ff-secondary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/*--------------- National Service ---------------*/
+.service-role h3 {
+  margin-top: 0.15rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--ff-secondary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--clr-text-primary);
+}
+
+.service-role ul {
+  max-width: 65ch;
+  padding-left: 1.1rem;
+}
+
+.service-role li + li {
+  margin-top: 0.25rem;
+}
+
+.service-text {
+  max-width: 65ch;
+}
+
+/* Space between the BMT photos and the 128 SQN part */
+.service-role-next {
+  margin-top: 3.5rem;
+}
+
+/* Six BMT photos sit in two rows of three on desktop */
+@media (min-width: 768px) {
+  .photo-grid.photo-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Wider crop, kept towards the top so heads aren't cut off */
+  .photo-grid.photo-grid-3 img {
+    aspect-ratio: 4 / 3;
+    object-position: center 25%;
+  }
+}
+
+/*--------------- Photo grids ---------------*/
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 1.25rem;
+}
+
+.service-role + .photo-grid,
+.service-role + .photo-wide {
+  margin-top: 2.5rem;
+}
+
+/* 128 SQN: 3 columns, with the first photo big and spanning two rows,
+   so five photos fill a neat 3 x 2 block */
+@media (min-width: 768px) {
+  .photo-grid.photo-grid-feature {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .photo-grid-feature figure:first-child {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Let the big photo stretch to the height of the two rows beside it */
+  .photo-grid-feature figure:first-child img {
+    flex: 1 1 0;
+    min-height: 0;
+    aspect-ratio: auto;
+    object-position: center 30%;
+  }
+}
+
+/* 3 columns but keep photos tall (for certificates and portraits) */
+.photo-grid.photo-grid-3.photo-grid-tall img {
+  aspect-ratio: 4 / 5;
+  object-position: center;
+}
+
+.PUS-red:hover {
+background-color: red;
+}
+  
+/* A wide photo placed under a grid */
+.photo-wide-after {
+  margin-top: 1.25rem;
+}
+
+/* For photos where the important part is lower down */
+.photo-grid img.focus-low {
+  object-position: center 65%;
+}
+
+/* Certificate image at the bottom of an Achievements card */
+.card-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3; /* same shape on every card, so cards line up */
+  object-fit: cover;
+  margin-top: 1rem;
+  border: 1px solid var(--clr-border);
+  border-radius: 8px;
+}
+
+/* Certificate image under the Certifications list */
+.cert-photo {
+  margin-top: 1.5rem;
+}
+
+.cert-photo img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--clr-border);
+  border-radius: 8px;
+}
+
+.cert-photo figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+
+/* Space under a photo row that has another photo row right after it */
+.photo-row-gap {
+  margin-bottom: 1.25rem;
+}
+
+/* Photos inside an Experience timeline entry */
+.timeline-photos {
+  margin-top: 1.5rem;
+}
+
+/* Two wide photos side by side on desktop */
+@media (min-width: 768px) {
+  .photo-grid.photo-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.photo-grid.photo-grid-2 img {
+  aspect-ratio: 16 / 10;
+}
+
+.photo-grid-2 {
+  margin-bottom: 1.25rem;
+}
+
+/* One wide photo shown at full width, e.g. the recon formation photo */
+.photo-wide {
+  margin-bottom: 1.25rem;
+}
+
+.photo-wide img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.photo-wide figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+
+.photo-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 12px;
+  background-color: var(--clr-border);
+}
+
+/* For photos where the person stands near the right edge */
+.photo-grid img.focus-right {
+  object-position: right center;
+}
+
+/* For photos where the important part is near the left edge */
+.photo-grid img.focus-left {
+  object-position: left center;
+}
+
+.photo-grid figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+
+/*--------------- Achievements ---------------*/
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 1rem;
+}
+
+.card {
+  padding: 1.5rem;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+}
+
+.card h3 {
+  margin: 0.4rem 0 0.5rem;
+  font-family: var(--ff-secondary);
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: var(--clr-text-primary);
+}
+
+.card p:last-child {
+  font-size: 0.95rem;
+}
+
+/*--------------- Education & Certifications ---------------*/
+.two-col {
+  display: grid;
+  gap: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.row-list {
+  list-style: none;
+}
+
+.row-list li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.row-list li:first-child {
+  border-top: 1px solid var(--clr-border);
+}
+
+.row-name {
+  display: block;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+}
+
+.row-meta {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+
+/*--------------- Contact ---------------*/
+.contact {
+  text-align: center;
+}
+
+.contact .section-title {
+  justify-content: center;
+}
+
+.contact p {
+  max-width: 50ch;
+  margin: 0 auto;
+}
+
+.contact-actions {
+  justify-content: center;
+}
+
+/* Round, clickable social icons */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  list-style: none;
+}
+
+.social-links a {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  color: var(--clr-accent);
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.social-links a:hover {
+  color: var(--clr-white);
+  background-color: var(--clr-accent);
+  transform: translateY(-2px);
+}
+
+.social-links svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: currentColor;
+}
+
+/*--------------- Question form ---------------*/
+.contact-form {
+  max-width: 600px;
+  margin: 3rem auto 0;
+  padding: 2rem;
+  text-align: left;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+}
+
+.contact-form h3 {
+  font-family: var(--ff-design);
+  font-size: 1.9rem;
+  font-weight: 400;
+  color: var(--clr-text-primary);
+}
+
+.contact .contact-form p.form-intro {
+  margin: 0.25rem 0 1.5rem;
+  max-width: none;
+}
+
+/* Name and email side by side on wider screens */
+.form-row {
+  display: grid;
+  gap: 0 1rem;
+}
+
+@media (min-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-field label {
+  font-family: var(--ff-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+}
+
+/* Red star next to required fields */
+.required-mark {
+  color: #B3261E;
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  font-family: var(--ff-primary);
+  font-size: 1rem; /* 16px stops iPhones zooming in when you tap a field */
+  color: var(--clr-text-primary);
+  background-color: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px rgba(47, 79, 58, 0.15);
+}
+
+.contact-form button {
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.contact .contact-form p.form-note {
+  margin: 0.75rem 0 0;
+  max-width: none;
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+}
+
+@media (max-width: 600px) {
+  .contact-form {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .contact-form button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/*--------------- Footer ---------------*/
+.site-footer {
+  padding: 2rem 1.25rem;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--clr-text-muted);
+  border-top: 1px solid var(--clr-border);
+}
+/*--------------- Phones ---------------*/
+/* Slightly tighter spacing so more fits on a small screen */
+@media (max-width: 600px) {
+  .hero {
+    padding-bottom: 3rem;
+  }
+
+  .marquee-strip {
+    margin-bottom: 2.5rem;
+  }
+
+  /* Photos two per row, like a phone's photo gallery
+     (the wide photo pairs stay one per row so they don't get too small) */
+  .photo-grid:not(.photo-grid-2),
+  .photo-grid.photo-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  /* If a grid has an odd number of photos, the last one fills the whole row */
+  .photo-grid:not(.photo-grid-2) figure:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .photo-grid:not(.photo-grid-2) figure:last-child:nth-child(odd) img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .photo-grid figcaption,
+  .photo-wide figcaption {
+    font-size: 0.8rem;
+  }
+
+  .section {
+    padding: 3.5rem 0;
+  }
+
+  .section-title {
+    margin-bottom: 1.5rem;
+  }
+}
