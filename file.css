@@ -53,6 +53,11 @@ a:focus-visible,
   outline-offset: 3px;
 }
 
+/* Anything with the hidden attribute stays hidden, even if a class gives it display: flex */
+[hidden] {
+  display: none !important;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -139,11 +144,24 @@ a:focus-visible,
 
 /* Each link has its own hover colour */
 .nav-items li:nth-child(1) a { --hover-clr: #2F4F3A; } /* About: forest green */
-.nav-items li:nth-child(2) a { --hover-clr: #1F5F8B; } /* Experience: blue */
-.nav-items li:nth-child(3) a { --hover-clr: #8A5A00; } /* National Service: amber */
-.nav-items li:nth-child(4) a { --hover-clr: #B3261E; } /* Achievements: red */
-.nav-items li:nth-child(5) a { --hover-clr: #6B3FA0; } /* Education: purple */
-.nav-items li:nth-child(6) a { --hover-clr: #0F766E; } /* Contact: teal */
+.nav-items li:nth-child(2) a { --hover-clr: #A0522D; } /* Projects: sienna */
+.nav-items li:nth-child(3) a { --hover-clr: #1F5F8B; } /* Experience: blue */
+.nav-items li:nth-child(4) a { --hover-clr: #8A5A00; } /* National Service: amber */
+.nav-items li:nth-child(5) a { --hover-clr: #B3261E; } /* Achievements: red */
+.nav-items li:nth-child(6) a { --hover-clr: #6B3FA0; } /* Education: purple */
+.nav-items li:nth-child(7) a { --hover-clr: #0F766E; } /* Contact: teal */
+
+/* The mobile menu slides down when it opens */
+#menu-toggle:checked ~ .nav-items {
+  animation: menu-in 0.25s ease;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
 
 .nav-items li:nth-child(1) a:hover {
   background-color: yellow;
@@ -170,6 +188,15 @@ a:focus-visible,
 
 .nav-items a:hover::after,
 .nav-items a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* The section you're reading right now (script.js adds .is-active) */
+.nav-items a.is-active {
+  color: var(--hover-clr);
+}
+
+.nav-items a.is-active::after {
   transform: scaleX(1);
 }
 
@@ -206,7 +233,7 @@ a:focus-visible,
   border: 1px solid var(--clr-accent);
   border-radius: 999px;
   text-decoration: none;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s; /* transform: the "magnetic" pull in script.js */
 }
 
 .btn-primary {
@@ -284,7 +311,7 @@ a:focus-visible,
   display: flex;
   width: max-content;
   animation: marquee 40s linear infinite;
-  color:black;
+  color: green;
 }
 
 /* How the loop works:
@@ -804,6 +831,25 @@ background-color: red;
   border-radius: 12px;
 }
 
+/* Cards lift slightly on hover (used by Achievements, About, Skills, Interests and Projects) */
+.card,
+.value-card,
+.skill-card,
+.interest-list li,
+.project-card {
+  transition: transform 0.25s ease, border-color 0.25s, box-shadow 0.25s;
+}
+
+.card:hover,
+.value-card:hover,
+.skill-card:hover,
+.interest-list li:hover,
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--clr-accent);
+  box-shadow: 0 14px 28px -16px rgba(47, 79, 58, 0.45);
+}
+
 .card h3 {
   margin: 0.4rem 0 0.5rem;
   font-family: var(--ff-secondary);
@@ -1017,6 +1063,776 @@ background-color: red;
   color: var(--clr-text-muted);
   border-top: 1px solid var(--clr-border);
 }
+/*--------------- Footer links ---------------*/
+.footer-brand {
+  font-family: var(--ff-brand);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--clr-text-primary);
+}
+
+.footer-tagline {
+  margin-top: 0.25rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  list-style: none;
+}
+
+.footer-links a {
+  display: inline-block;
+  padding: 0.5rem 0; /* taller tap area on phones */
+  font-family: var(--ff-secondary);
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--clr-accent);
+}
+
+/*--------------- Scroll animations ---------------*/
+/* Elements with .reveal fade up when they scroll into view (script.js adds .is-visible).
+   --i is set by script.js inside [data-stagger] groups, so items appear one after another.
+   An animation is used rather than a transition so the hover lift on cards isn't delayed. */
+.js .reveal:not(.is-visible) {
+  opacity: 0;
+}
+
+.js .reveal.is-visible {
+  animation: reveal-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 120ms);
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* Timeline dots pop in as each entry appears */
+.js .timeline-item.is-visible::before {
+  animation: dot-in 0.4s 0.2s ease backwards;
+}
+
+@keyframes dot-in {
+  from {
+    transform: scale(0);
+  }
+}
+
+/*--------------- Hero extras ---------------*/
+.hero-stage {
+  position: relative;
+}
+
+/* The network drawing sits behind the text and fades out towards the middle so the text stays easy to read */
+.hero-network {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 20%, #000 75%);
+  mask-image: radial-gradient(ellipse at center, transparent 20%, #000 75%);
+}
+
+.hero-stage .container {
+  position: relative; /* sits on top of the canvas */
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+  padding: 0.4rem 0.95rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+}
+
+.hero-roles {
+  margin-top: 1rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.social-links.hero-social {
+  margin-top: 1.75rem;
+}
+
+.hero-social a {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.hero-social svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* Green dot with a ring that pulses outwards, meaning "live" */
+.status-dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  color: #2E9D5B;
+  background-color: currentColor;
+  border-radius: 50%;
+}
+
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  border-radius: 50%;
+  animation: pulse 2s ease-out infinite;
+}
+
+/* Finished projects get a grey dot that doesn't pulse */
+.status-dot.is-done {
+  color: var(--clr-text-muted);
+}
+
+.status-dot.is-done::after {
+  content: none;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/*--------------- About extras ---------------*/
+.about-intro {
+  display: grid;
+  gap: 1rem 3rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .about-intro {
+    grid-template-columns: 1fr 1.6fr;
+  }
+}
+
+.about-intro h3 {
+  font-family: var(--ff-design);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.15;
+  color: var(--clr-text-primary);
+}
+
+.about-intro p + p {
+  margin-top: 0.9rem;
+}
+
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+  list-style: none;
+}
+
+.value-card {
+  padding: 1.4rem;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+}
+
+.value-number {
+  font-family: var(--ff-brand);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--clr-border);
+  transition: color 0.25s;
+}
+
+.value-card:hover .value-number {
+  color: var(--clr-accent);
+}
+
+.value-card h3 {
+  margin: 0.6rem 0 0.35rem;
+  font-family: var(--ff-secondary);
+  font-size: 1.05rem;
+  color: var(--clr-text-primary);
+}
+
+.value-card p {
+  font-size: 0.9rem;
+}
+
+/*--------------- Pill buttons (Interests tabs and Project filters) ---------------*/
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.pill-btn {
+  min-height: 44px; /* comfortable to tap */
+  padding: 0.5rem 1.1rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.pill-btn:hover {
+  border-color: var(--clr-accent);
+}
+
+.pill-btn[aria-selected="true"],
+.pill-btn[aria-pressed="true"] {
+  color: var(--clr-white);
+  background-color: var(--clr-accent);
+  border-color: var(--clr-accent);
+}
+
+.pill-btn:focus-visible,
+.project-open:focus-visible,
+.modal-close:focus-visible,
+.back-to-top:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+/*--------------- Technical interests ---------------*/
+.interest-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.interest-list li {
+  padding: 1.1rem 1.2rem;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+}
+
+/* Restarts every time a tab is opened, because the panel goes from hidden to shown */
+.tab-panel:not([hidden]) .interest-list li {
+  animation: reveal-in 0.4s ease backwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+.interest-list strong {
+  display: block;
+  font-family: var(--ff-secondary);
+  font-weight: 700;
+  color: var(--clr-text-primary);
+}
+
+.interest-list span {
+  font-size: 0.9rem;
+}
+
+/*--------------- Projects ---------------*/
+.project-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card {
+  position: relative; /* lets the "View details" button cover the whole card */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.75rem;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+}
+
+/* Replays when a filter shows the card again */
+.project-card:not([hidden]) {
+  animation: reveal-in 0.4s ease backwards;
+}
+
+.project-card h3 {
+  font-family: var(--ff-design);
+  font-size: 1.9rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--clr-text-primary);
+}
+
+.tags-small li {
+  padding: 0.25rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+}
+
+.project-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 0.5rem 0;
+  font-family: var(--ff-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--clr-accent);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* An invisible layer over the whole card, so clicking anywhere on it opens the details */
+.project-open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+}
+
+.project-open .material-symbols-outlined {
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+
+.project-card:hover .project-open .material-symbols-outlined {
+  transform: translateX(4px);
+}
+
+.projects-more {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* ---------- Project pop-up ---------- */
+.project-modal {
+  width: min(640px, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  color: var(--clr-text-secondary);
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.35);
+}
+
+.project-modal[open] {
+  animation: modal-in 0.3s ease;
+}
+
+.project-modal::backdrop {
+  background-color: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+/* Stops the page behind the pop-up from scrolling */
+html:has(.project-modal[open]) {
+  overflow: hidden;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.97);
+  }
+}
+
+.modal-close {
+  position: sticky;
+  top: 0.75rem;
+  float: right;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: 0.75rem 0.75rem 0 0;
+  color: var(--clr-text-primary);
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  border-color: var(--clr-accent);
+}
+
+.modal-body {
+  padding: 2rem 1.75rem 1.75rem;
+}
+
+.modal-body > * + * {
+  margin-top: 0.85rem;
+}
+
+.modal-body h3 {
+  font-family: var(--ff-design);
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--clr-text-primary);
+}
+
+.modal-body h4 {
+  margin-top: 1.25rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+}
+
+.modal-body h4 + p {
+  margin-top: 0.3rem;
+}
+
+/*--------------- How I approach problems ---------------*/
+.process {
+  display: grid;
+  gap: 1.25rem;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .process {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.process-step {
+  position: relative;
+  padding: 1.5rem;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+}
+
+/* Short line joining each step to the next: downwards on phones, sideways on desktop */
+.process-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 2.6rem;
+  bottom: -1.25rem;
+  width: 2px;
+  height: 1.25rem;
+  background-color: var(--clr-accent);
+  opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+  .process-step:not(:last-child)::after {
+    left: auto;
+    right: -1.25rem;
+    bottom: auto;
+    top: 2.6rem;
+    width: 1.25rem;
+    height: 2px;
+  }
+}
+
+.process-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.25rem;
+  color: var(--clr-accent);
+  background-color: rgba(47, 79, 58, 0.1);
+  border-radius: 10px;
+}
+
+.process-number {
+  margin-top: 1rem;
+  font-family: var(--ff-brand);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--clr-accent);
+}
+
+.process-step h3 {
+  margin-bottom: 0.4rem;
+  font-family: var(--ff-design);
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--clr-text-primary);
+}
+
+.process-step p:last-child {
+  font-size: 0.92rem;
+}
+
+/*--------------- Skills ---------------*/
+.skill-card {
+  padding: 1.5rem;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+}
+
+.skill-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+  font-family: var(--ff-secondary);
+  font-size: 1.1rem;
+  color: var(--clr-text-primary);
+}
+
+.skill-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.25rem;
+  color: var(--clr-accent);
+  background-color: rgba(47, 79, 58, 0.1);
+  border-radius: 10px;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.skill-card:hover .skill-icon {
+  color: var(--clr-white);
+  background-color: var(--clr-accent);
+}
+
+/*--------------- Currently building (dashboard) ---------------*/
+/* A dark section: the colour variables are swapped here, so everything inside turns light-on-dark */
+.section-dark {
+  --clr-text-primary: #F4F3EF;
+  --clr-text-secondary: #C9D3CC;
+  --clr-text-muted: #93A398;
+  --clr-border: rgba(255, 255, 255, 0.12);
+  color: var(--clr-text-secondary);
+  background-color: #14231A;
+  background-image: radial-gradient(ellipse at top right, rgba(134, 214, 160, 0.12), transparent 60%);
+}
+
+.dashboard-updated {
+  margin: -1rem 0 2rem;
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+}
+
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.focus-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--clr-border);
+  border-radius: 14px;
+  transition: transform 0.25s ease, border-color 0.25s, background-color 0.25s;
+}
+
+.focus-card:hover {
+  transform: translateY(-4px);
+  background-color: rgba(255, 255, 255, 0.07);
+  border-color: rgba(134, 214, 160, 0.5);
+}
+
+.focus-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: var(--ff-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+}
+
+.focus-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #86D6A0;
+}
+
+.focus-live .status-dot {
+  color: #86D6A0;
+}
+
+.focus-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-family: var(--ff-secondary);
+  font-size: 1.15rem;
+  color: var(--clr-text-primary);
+}
+
+.focus-card h3 .material-symbols-outlined {
+  font-size: 1.3rem;
+  color: #86D6A0;
+}
+
+.focus-card p {
+  font-size: 0.92rem;
+}
+
+.focus-card .focus-meta {
+  margin-top: auto;
+  padding-top: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--clr-text-muted);
+  border-top: 1px solid var(--clr-border);
+}
+
+.focus-card p + .focus-meta {
+  margin-top: 1rem;
+}
+
+/*--------------- Contact form messages ---------------*/
+.contact .contact-form .field-error {
+  display: block;
+  font-size: 0.85rem;
+  color: #B3261E;
+}
+
+.form-field [aria-invalid="true"] {
+  border-color: #B3261E;
+}
+
+.form-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.92rem;
+  border-radius: 10px;
+}
+
+.form-status:empty {
+  display: none;
+}
+
+.form-status.is-success {
+  color: #1E3527;
+  background-color: #E7F2EA;
+}
+
+.form-status.is-error {
+  color: #8C1D18;
+  background-color: #FBEAEA;
+}
+
+/*--------------- Back to top button ---------------*/
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  color: var(--clr-white);
+  background-color: var(--clr-accent);
+  border-radius: 50%;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem);
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s, background-color 0.2s;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.back-to-top:hover {
+  background-color: var(--clr-accent-hover);
+}
+
+/*--------------- Reduced motion ---------------*/
+/* Turns off the new animations for visitors who have asked their device for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal:not(.is-visible) {
+    opacity: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .status-dot::after {
+    content: none;
+  }
+}
+
 /*--------------- Phones ---------------*/
 /* Slightly tighter spacing so more fits on a small screen */
 @media (max-width: 600px) {

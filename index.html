@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J.A. Jishnu | Portfolio</title>
-    <meta name="description" content="Portfolio of J.A. Jishnu, an incoming SUTD Computer Science and Design student in Singapore interested in AI, data science and cloud computing.">
+    <meta name="description" content="Portfolio of J.A. Jishnu, an incoming SUTD Computer Science and Design student in Singapore interested in AI, data science, cloud computing and cybersecurity.">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
     <!-- Phone / app settings -->
     <meta name="theme-color" content="#FAFAF8"> <!-- colours the phone's browser bar to match the page -->
     <link rel="apple-touch-icon" href="images/favicon.jpg"> <!-- icon used when saved to an iPhone home screen -->
     <meta name="apple-mobile-web-app-title" content="J.A. Jishnu"> <!-- name under that home-screen icon -->
     <!-- Google Material Symbols: only the icons listed in icon_names are downloaded (names must stay in A-Z order) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=arrow_downward,code,emoji_events,mail,menu_book,military_tech,open_in_new,person,photo_library,school,sports_basketball,translate,work,workspace_premium&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=arrow_downward,arrow_forward,arrow_upward,autorenew,bolt,build,check_circle,close,cloud,code,database,emoji_events,error,folder_open,interests,lightbulb,mail,menu_book,military_tech,open_in_new,person,photo_library,psychology,rocket_launch,route,school,search,security,smart_toy,sports_basketball,terminal,translate,work,workspace_premium&display=block">
     <link rel="stylesheet" href="file.css">
+    <!-- Tells the CSS that JavaScript is on, so scroll animations only hide things when they can also show them again -->
+    <script>document.documentElement.classList.add("js");</script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -30,6 +33,7 @@
 
             <ul class="nav-items">
                 <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#service">National Service</a></li>
                 <li><a href="#achievements">Achievements</a></li>
@@ -50,32 +54,59 @@
                 <span class="marquee-track" aria-hidden="true" data-text="Incoming SUTD Computer Science and Design student"></span>
             </p>
 
-            <div class="container">
-                <h1>My Portfolio</h1>
-                <p class="full-name">JAGANNATHAN ARULJOTHI JISHNU</p>
+            <div class="hero-stage">
+                <!-- Moving network of dots behind the hero text. Drawn by script.js -->
+                <canvas class="hero-network" aria-hidden="true"></canvas>
 
-                <p class="tagline">Striving to harness technology to make a difference in my life and in the lives of everyone around me, wherever I go.</p>
-                <p class="hero-text">
-                    Incoming SUTD Computer Science and Design student, interested in AI, data science and cloud computing.
-                    I won bronze at the Singapore Physics League and served as a Tactical UAV Specialist
-                    with the RSAF's 128 Squadron.
-                </p>
+                <div class="container">
+                    <p class="status-pill"><span class="status-dot" aria-hidden="true"></span>Currently: getting ready for SUTD and building technical projects</p>
 
-                <div class="hero-actions">
-                    <a href="#experience" class="btn btn-primary">See my experience<span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span></a>
-                    <a href="#contact" class="btn btn-secondary"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Get in touch</a>
+                    <h1>My Portfolio</h1>
+                    <p class="full-name">JAGANNATHAN ARULJOTHI JISHNU</p>
+                    <p class="hero-roles">AI &middot; Data &middot; Cloud &middot; Cybersecurity</p>
+
+                    <p class="tagline">Striving to harness technology to make a difference in my life and in the lives of everyone around me, wherever I go.</p>
+                    <p class="hero-text">
+                        Incoming SUTD Computer Science and Design student, interested in AI, data science and cloud computing.
+                        I won bronze at the Singapore Physics League and served as a Tactical UAV Specialist
+                        with the RSAF's 128 Squadron.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">Explore my work<span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span></a>
+                        <a href="#contact" class="btn btn-secondary"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Get in touch</a>
+                    </div>
+
+                    <ul class="social-links hero-social">
+                        <li>
+                            <a href="https://www.linkedin.com/in/j-a-jishnu/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jajishnu2006-spec" target="_blank" rel="noopener" aria-label="GitHub">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:j.a.jishnu2006@gmail.com" aria-label="Email">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- data-count: script.js counts up to this number when the stat scrolls into view -->
+                    <ul class="stats">
+                        <li>
+                            <span class="stat-number" data-count="1500" data-suffix="+">1,500+</span>
+                            <span class="stat-label">students at JC1 Orientation, which I helped run</span>
+                        </li>
+                        <li>
+                            <span class="stat-number">Bronze</span>
+                            <span class="stat-label">Singapore Physics League 2024</span>
+                        </li>
+                    </ul>
                 </div>
-
-                <ul class="stats">
-                    <li>
-                        <span class="stat-number">1,500+</span>
-                        <span class="stat-label">students at JC1 Orientation, which I helped run</span>
-                    </li>
-                    <li>
-                        <span class="stat-number">Bronze</span>
-                        <span class="stat-label">Singapore Physics League 2024</span>
-                    </li>
-                </ul>
             </div>
         </section>
 
@@ -83,6 +114,38 @@
         <section id="about" class="section">
             <div class="container">
                 <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">person</span>About me</h2>
+
+                <div class="about-intro reveal">
+                    <h3>More than just code</h3>
+                    <div>
+                        <p>I'm interested in how technology solves real-world problems, especially through artificial intelligence, data science, cloud computing, cybersecurity, automation, and where technology meets finance.</p>
+                        <p>I became interested in technology because the fast-growing AI and data ecosystem made it hard to understand where different technologies actually fit together. That curiosity led me to explore programming, cybersecurity, data analytics, cloud technologies and AI.</p>
+                    </div>
+                </div>
+
+                <!-- Four things I bring. data-stagger makes them appear one after another -->
+                <ul class="value-grid" data-stagger>
+                    <li class="value-card reveal">
+                        <span class="value-number">01</span>
+                        <h3>Leadership</h3>
+                        <p>Student Council, orientation groups and an Army Specialist rank.</p>
+                    </li>
+                    <li class="value-card reveal">
+                        <span class="value-number">02</span>
+                        <h3>Technology</h3>
+                        <p>AI, data, cloud and security, plus this hand-built website.</p>
+                    </li>
+                    <li class="value-card reveal">
+                        <span class="value-number">03</span>
+                        <h3>Problem Solving</h3>
+                        <p>ProAesthetics, the HumanITy Challenge and a hydroponics fridge.</p>
+                    </li>
+                    <li class="value-card reveal">
+                        <span class="value-number">04</span>
+                        <h3>Continuous Learning</h3>
+                        <p>Courses with Google Cloud, Azure and Temasek Polytechnic, and always more.</p>
+                    </li>
+                </ul>
 
                 <div class="about-grid">
                     <div>
@@ -124,13 +187,229 @@
             </div>
         </section>
 
+        <!-- ========== Technical interests (tabs) ========== -->
+        <!-- Each tab button shows the panel named in its aria-controls. script.js does the switching.
+             To add a topic: copy a <li> inside a panel. -->
+        <section id="interests" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">interests</span>Technical interests</h2>
+
+                <div class="pill-group" role="tablist" aria-label="Technology areas">
+                    <button class="pill-btn" type="button" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="true">AI &amp; ML</button>
+                    <button class="pill-btn" type="button" role="tab" id="tab-data" aria-controls="panel-data" aria-selected="false" tabindex="-1">Data</button>
+                    <button class="pill-btn" type="button" role="tab" id="tab-cloud" aria-controls="panel-cloud" aria-selected="false" tabindex="-1">Cloud</button>
+                    <button class="pill-btn" type="button" role="tab" id="tab-cyber" aria-controls="panel-cyber" aria-selected="false" tabindex="-1">Cybersecurity</button>
+                    <button class="pill-btn" type="button" role="tab" id="tab-code" aria-controls="panel-code" aria-selected="false" tabindex="-1">Programming</button>
+                    <button class="pill-btn" type="button" role="tab" id="tab-auto" aria-controls="panel-auto" aria-selected="false" tabindex="-1">Automation</button>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-ai" aria-labelledby="tab-ai">
+                    <ul class="interest-list" data-stagger>
+                        <li><strong>Machine Learning</strong><span>How models learn patterns from data</span></li>
+                        <li><strong>AI Agents</strong><span>Systems that plan and act using tools</span></li>
+                        <li><strong>Prompt Engineering</strong><span>Getting reliable results from LLMs</span></li>
+                        <li><strong>Data Analysis</strong><span>The groundwork every model depends on</span></li>
+                        <li><strong>Intelligent Automation</strong><span>Using AI to take over repetitive work</span></li>
+                    </ul>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-data" aria-labelledby="tab-data" hidden>
+                    <ul class="interest-list" data-stagger>
+                        <li><strong>Data Analysis</strong><span>Turning raw numbers into decisions</span></li>
+                        <li><strong>Data Visualisation</strong><span>Charts that make the point clear</span></li>
+                        <li><strong>Google Sheets &amp; Forms</strong><span>Used to turn Student Council feedback into recommendations</span></li>
+                        <li><strong>Data Bootcamp</strong><span>Temasek Polytechnic, 2021</span></li>
+                    </ul>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-cloud" aria-labelledby="tab-cloud" hidden>
+                    <ul class="interest-list" data-stagger>
+                        <li><strong>Microsoft Azure</strong><span>Core services, from my Azure course</span></li>
+                        <li><strong>Google Cloud</strong><span>Introduction to LLMs on Google Cloud</span></li>
+                        <li><strong>Cloud Architecture</strong><span>How systems scale and stay up</span></li>
+                        <li><strong>Cloud Security</strong><span>Keeping data and workloads safe</span></li>
+                    </ul>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-cyber" aria-labelledby="tab-cyber" hidden>
+                    <ul class="interest-list" data-stagger>
+                        <li><strong>Security Operations</strong><span>How a SOC monitors and responds</span></li>
+                        <li><strong>Threat Detection</strong><span>Spotting attacks early</span></li>
+                        <li><strong>Cybersecurity Fundamentals</strong><span>Access control, network security and incident response</span></li>
+                    </ul>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-code" aria-labelledby="tab-code" hidden>
+                    <ul class="interest-list" data-stagger>
+                        <li><strong>Python</strong><span>My main language for data and AI</span></li>
+                        <li><strong>Git &amp; GitHub</strong><span>Version control for everything I build</span></li>
+                        <li><strong>Google Colab</strong><span>Notebooks for trying out ideas quickly</span></li>
+                        <li><strong>HTML &amp; CSS</strong><span>This site is written by hand</span></li>
+                    </ul>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-auto" aria-labelledby="tab-auto" hidden>
+                    <ul class="interest-list" data-stagger>
+                        <li><strong>AI Agents</strong><span>Letting AI handle multi-step tasks</span></li>
+                        <li><strong>Workflow Automation</strong><span>Cutting repetitive steps out of everyday work</span></li>
+                        <li><strong>Python Scripting</strong><span>Small scripts that save a lot of time</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== Projects ========== -->
+        <!-- data-category on each card must match a filter button's data-filter.
+             A card can have more than one category, separated by spaces.
+             The .project-more part is hidden on the card and shown in the pop-up. -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">folder_open</span>Projects</h2>
+
+                <div class="pill-group" aria-label="Filter projects">
+                    <button class="pill-btn" type="button" data-filter="all" aria-pressed="true">All</button>
+                    <button class="pill-btn" type="button" data-filter="ai-data" aria-pressed="false">AI / Data</button>
+                    <button class="pill-btn" type="button" data-filter="cybersecurity" aria-pressed="false">Cybersecurity</button>
+                    <button class="pill-btn" type="button" data-filter="web" aria-pressed="false">Web</button>
+                    <button class="pill-btn" type="button" data-filter="research" aria-pressed="false">Research</button>
+                </div>
+
+                <div class="project-grid reveal">
+                    <!-- TODO: check the technologies, contribution and status for College Crack -->
+                    <article class="project-card" data-category="web">
+                        <p class="card-label">Web &middot; Education</p>
+                        <h3>College Crack</h3>
+                        <p>A student resource and career guidance platform covering technology, AI/ML, cloud, IT and educational pathways.</p>
+                        <ul class="tags tags-small">
+                            <li>Web</li>
+                            <li>Content design</li>
+                            <li>Career research</li>
+                        </ul>
+                        <p class="project-status"><span class="status-dot" aria-hidden="true"></span>In progress</p>
+                        <div class="project-more" hidden>
+                            <h4>The problem</h4>
+                            <p>Students choosing a path into tech find information about AI/ML, cloud and IT courses and careers scattered and confusing.</p>
+                            <h4>My contribution</h4>
+                            <p>Planning how the content is organised and writing the guides.</p>
+                        </div>
+                        <button class="project-open" type="button" aria-haspopup="dialog">View details<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
+                    </article>
+
+                    <article class="project-card" data-category="research">
+                        <p class="card-label">Research &middot; Healthcare</p>
+                        <h3>ProAesthetics</h3>
+                        <p>A pre-university project exploring solutions for people with lower-limb prosthetics, including bamboo liners, 3D sockets and modular prosthetic shells.</p>
+                        <ul class="tags tags-small">
+                            <li>Design research</li>
+                            <li>Expert interviews</li>
+                            <li>3D sockets</li>
+                            <li>Sustainable materials</li>
+                        </ul>
+                        <p class="project-status"><span class="status-dot is-done" aria-hidden="true"></span>Completed, 2023</p>
+                        <div class="project-more" hidden>
+                            <h4>The problem</h4>
+                            <p>Lower-limb prosthetics can be uncomfortable and costly to replace for people with amputations in Singapore.</p>
+                            <h4>My contribution</h4>
+                            <p>Team leader of 5. I set up expert consultations over Zoom and assigned tasks based on each member's strengths.</p>
+                        </div>
+                        <button class="project-open" type="button" aria-haspopup="dialog">View details<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
+                    </article>
+
+                    <!-- TODO: check the technologies and contribution for the tracker -->
+                    <article class="project-card" data-category="ai-data">
+                        <p class="card-label">AI / Data</p>
+                        <h3>Market Intelligence Tracker</h3>
+                        <p>A structured system for tracking technology careers and the market: opportunities, companies, skills, events and trends.</p>
+                        <ul class="tags tags-small">
+                            <li>Data organisation</li>
+                            <li>Research</li>
+                            <li>Trend tracking</li>
+                        </ul>
+                        <p class="project-status"><span class="status-dot" aria-hidden="true"></span>Ongoing</p>
+                        <div class="project-more" hidden>
+                            <h4>The problem</h4>
+                            <p>Information about tech companies, roles, skills and events changes quickly and is spread across many sources.</p>
+                            <h4>My contribution</h4>
+                            <p>Designing the tracking structure and keeping it up to date.</p>
+                        </div>
+                        <button class="project-open" type="button" aria-haspopup="dialog">View details<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
+                    </article>
+
+                    <article class="project-card" data-category="cybersecurity">
+                        <p class="card-label">Cybersecurity</p>
+                        <h3>Cybersecurity Learning</h3>
+                        <p>A collection of cybersecurity learning and certification work, including ISC2 Certified in Cybersecurity.</p>
+                        <ul class="tags tags-small">
+                            <li>ISC2 CC</li>
+                            <li>Security fundamentals</li>
+                            <li>SOC concepts</li>
+                        </ul>
+                        <p class="project-status"><span class="status-dot" aria-hidden="true"></span>Ongoing</p>
+                        <div class="project-more" hidden>
+                            <h4>The goal</h4>
+                            <p>Building a solid foundation before going deeper into security operations and cloud security.</p>
+                            <h4>My contribution</h4>
+                            <p>Self-directed study, notes and certification preparation.</p>
+                        </div>
+                        <button class="project-open" type="button" aria-haspopup="dialog">View details<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
+                    </article>
+                </div>
+
+                <p class="projects-more">
+                    <a href="https://github.com/jajishnu2006-spec" class="btn btn-secondary" target="_blank" rel="noopener">More on GitHub<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></a>
+                </p>
+            </div>
+
+            <!-- Pop-up for project details. script.js copies the clicked card into .modal-body -->
+            <dialog class="project-modal" id="project-modal" aria-labelledby="modal-title">
+                <button class="modal-close" type="button" aria-label="Close">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+                <div class="modal-body"></div>
+            </dialog>
+        </section>
+
+        <!-- ========== How I approach problems ========== -->
+        <section id="approach" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">route</span>How I approach problems</h2>
+
+                <ol class="process" data-stagger>
+                    <li class="process-step reveal">
+                        <span class="process-icon material-symbols-outlined" aria-hidden="true">lightbulb</span>
+                        <p class="process-number">01</p>
+                        <h3>Understand</h3>
+                        <p>Break the problem down and work out what actually matters.</p>
+                    </li>
+                    <li class="process-step reveal">
+                        <span class="process-icon material-symbols-outlined" aria-hidden="true">search</span>
+                        <p class="process-number">02</p>
+                        <h3>Research</h3>
+                        <p>Find the relevant information, the constraints, and people who know more than I do.</p>
+                    </li>
+                    <li class="process-step reveal">
+                        <span class="process-icon material-symbols-outlined" aria-hidden="true">build</span>
+                        <p class="process-number">03</p>
+                        <h3>Build</h3>
+                        <p>Create a practical solution, even if the first version is rough.</p>
+                    </li>
+                    <li class="process-step reveal">
+                        <span class="process-icon material-symbols-outlined" aria-hidden="true">autorenew</span>
+                        <p class="process-number">04</p>
+                        <h3>Iterate</h3>
+                        <p>Test it, learn from feedback, and improve.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
         <!-- ========== Experience ========== -->
         <section id="experience" class="section">
             <div class="container">
                 <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">work</span>Experience</h2>
 
                 <ol class="timeline">
-                    <li class="timeline-item">
+                    <li class="timeline-item reveal">
                         <p class="timeline-date">Jan 2024 – Feb 2025</p>
                         <h3>Orientation Group Leader</h3>
                         <p class="org">Tampines Meridian Junior College</p>
@@ -164,7 +443,7 @@
                         </div>
                     </li>
 
-                    <li class="timeline-item">
+                    <li class="timeline-item reveal">
                         <p class="timeline-date">Jul 2024</p>
                         <h3>Volunteer</h3>
                         <p class="org">Pasir Ris-Punggol Town Council</p>
@@ -175,7 +454,7 @@
                         </ul>
                     </li>
 
-                    <li class="timeline-item">
+                    <li class="timeline-item reveal">
                         <p class="timeline-date">Jan 2024</p>
                         <h3>HumanITy Challenge 2024</h3>
                         <p class="org">NUS School of Computing</p>
@@ -185,7 +464,7 @@
                         </ul>
                     </li>
 
-                    <li class="timeline-item">
+                    <li class="timeline-item reveal">
                         <p class="timeline-date">May 2023 – Aug 2024</p>
                         <h3>Event Lead, TM Celebrates</h3>
                         <p class="org">Tampines Meridian Student Council</p>
@@ -194,7 +473,7 @@
                         </ul>
                     </li>
 
-                    <li class="timeline-item">
+                    <li class="timeline-item reveal">
                         <p class="timeline-date">Jan 2023 – Aug 2024</p>
                         <h3>Event Planner &amp; Leader</h3>
                         <p class="org">Tampines Meridian Student Council</p>
@@ -218,7 +497,7 @@
                         </div>
                     </li>
 
-                    <li class="timeline-item">
+                    <li class="timeline-item reveal">
                         <p class="timeline-date">May 2023 – Jun 2023</p>
                         <h3>Delegate &amp; Team Leader, Pre-University Seminar</h3>
                         <p class="org">Ministry of Education &middot; Nanyang Technological University</p>
@@ -242,7 +521,7 @@
                         </div>
                     </li>
 
-                    <li class="timeline-item">
+                    <li class="timeline-item reveal">
                         <p class="timeline-date">Feb 2023 – Oct 2023</p>
                         <h3>Project Work Team Leader, "ProAesthetics"</h3>
                         <p class="org">Tampines Meridian Junior College</p>
@@ -288,7 +567,7 @@
                 <!-- ---------- Specialist Cadet Course (SCS) ---------- -->
                 <div class="service-role service-role-next">
                     <p class="timeline-date">Specialist Cadet School (SCS) &middot; Graduated August 2025</p>
-                    <h3 style="background-color: red;">18/2025 Army Intelligence Specialist Cadet Course</h3>
+                    <h3>18/2025 Army Intelligence Specialist Cadet Course</h3>
                     <ul>
                         <li>Graduated from the Specialist Cadet Course and was promoted to Specialist (3SG) on 21 August 2025.</li>
                         <li>Received the <strong>SAF Specialist Pride</strong>, a bayonet that symbolises a Specialist's journey of leadership.</li>
@@ -401,34 +680,34 @@
             <div class="container">
                 <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">emoji_events</span>Achievements</h2>
 
-                <div class="card-grid">
-                    <article class="card">
+                <div class="card-grid" data-stagger>
+                    <article class="card reveal">
                         <p class="card-label">National Service</p>
                         <h3>128 SQN Best TUAV Specialist</h3>
                         <p>Presented by the Commanding Officer of 128 Squadron, RSAF, for contribution and professionalism during National Service.</p>
                         <img class="card-photo" src="images/web/ns-best-tuav.jpg" alt="128 SQN Best TUAV Specialist award plaque for 2SG Jagannathan Aruljothi Jishnu, presented by the Commanding Officer" loading="lazy">
                     </article>
 
-                    <article class="card">
+                    <article class="card reveal">
                         <p class="card-label">Academic</p>
                         <h3>Bronze, Singapore Physics League 2024</h3>
                         <p>Senior Category, with my team The Faradays Five. Also competed in the SASMO Math Olympiad and the SJChO Chemistry Olympiad.</p>
                         <img class="card-photo" src="images/web/physics-league-cert.jpg" alt="Certificate awarding Jagannathan Aruljothi Jishnu, team The Faradays Five, Bronze in the Senior Category of the 4th Singapore Physics League 2024" loading="lazy">
                     </article>
 
-                    <article class="card">
+                    <article class="card reveal">
                         <p class="card-label">Innovation</p>
                         <h3>Project noticed by DPM Lawrence Wong</h3>
                         <p>Our hydroponics fridge from the 2023 Pre-University Seminar at NTU drew his interest.</p>
                     </article>
 
-                    <article class="card">
+                    <article class="card reveal">
                         <p class="card-label">Public speaking</p>
                         <h3>Master of Ceremonies, 2024</h3>
                         <p>Hosted the TMJC Open House and JC1 Orientation.</p>
                     </article>
 
-                    <article class="card">
+                    <article class="card reveal">
                         <p class="card-label">Leadership</p>
                         <h3>Student Council Leader, 2020 – 2022</h3>
                         <p>Led initiatives for a positive school environment, and was Core Leader of the Secondary 1 Orientation Camp in 2022.</p>
@@ -494,7 +773,7 @@
                             </li>
                             <li>
                                 <span class="row-name">Azure Course</span>
-                                <span class="row-meta">Great Learning Academy &middot; Jul 2024</span>
+                                <span class="row-meta"> &middot; Jul 2024</span>
                             </li>
                             <li>
                                 <span class="row-name">Introduction to Personal Investing</span>
@@ -515,11 +794,102 @@
             </div>
         </section>
 
+        <!-- ========== Skills ========== -->
+        <!-- No percentage bars on purpose: they can't be measured honestly -->
+        <section id="skills" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">bolt</span>Skills</h2>
+
+                <div class="card-grid" data-stagger>
+                    <article class="skill-card reveal">
+                        <h3><span class="skill-icon material-symbols-outlined" aria-hidden="true">terminal</span>Programming</h3>
+                        <ul class="tags tags-small">
+                            <li>Python</li>
+                            <li>Git</li>
+                            <li>GitHub</li>
+                            <li>HTML &amp; CSS</li>
+                        </ul>
+                    </article>
+                    <article class="skill-card reveal">
+                        <h3><span class="skill-icon material-symbols-outlined" aria-hidden="true">psychology</span>AI / Data</h3>
+                        <ul class="tags tags-small">
+                            <li>Machine Learning</li>
+                            <li>Data Analysis</li>
+                            <li>AI Agents</li>
+                            <li>Prompt Engineering</li>
+                        </ul>
+                    </article>
+                    <article class="skill-card reveal">
+                        <h3><span class="skill-icon material-symbols-outlined" aria-hidden="true">cloud</span>Cloud</h3>
+                        <ul class="tags tags-small">
+                            <li>Microsoft Azure</li>
+                            <li>Google Cloud</li>
+                            <li>Cloud Fundamentals</li>
+                        </ul>
+                    </article>
+                    <article class="skill-card reveal">
+                        <h3><span class="skill-icon material-symbols-outlined" aria-hidden="true">security</span>Cybersecurity</h3>
+                        <ul class="tags tags-small">
+                            <li>Security Fundamentals</li>
+                            <li>SOC Concepts</li>
+                            <li>Threat Detection</li>
+                        </ul>
+                    </article>
+                    <article class="skill-card reveal">
+                        <h3><span class="skill-icon material-symbols-outlined" aria-hidden="true">person</span>Professional</h3>
+                        <ul class="tags tags-small">
+                            <li>Leadership</li>
+                            <li>Communication</li>
+                            <li>Public Speaking</li>
+                            <li>Teamwork</li>
+                            <li>Problem Solving</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== Currently building (dashboard) ========== -->
+        <!-- Update the "Last updated" line whenever you change these cards -->
+        <section id="focus" class="section section-dark">
+            <div class="container">
+                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">rocket_launch</span>Currently building</h2>
+                <p class="dashboard-updated">Last updated October 2026</p>
+
+                <ul class="focus-grid" data-stagger>
+                    <li class="focus-card reveal">
+                        <p class="focus-top"><span>Focus 01</span><span class="focus-live"><span class="status-dot" aria-hidden="true"></span>Active</span></p>
+                        <h3><span class="material-symbols-outlined" aria-hidden="true">smart_toy</span>AI &amp; Automation</h3>
+                        <p>Exploring AI agents, automation and practical AI applications.</p>
+                        <p class="focus-meta">Stage: exploring</p>
+                    </li>
+                    <li class="focus-card reveal">
+                        <p class="focus-top"><span>Focus 02</span><span class="focus-live"><span class="status-dot" aria-hidden="true"></span>Active</span></p>
+                        <h3><span class="material-symbols-outlined" aria-hidden="true">code</span>Technical Foundation</h3>
+                        <p>Strengthening Python, GitHub, cloud and data skills.</p>
+                        <p class="focus-meta">Stage: learning by building</p>
+                    </li>
+                    <li class="focus-card reveal">
+                        <p class="focus-top"><span>Focus 03</span><span class="focus-live"><span class="status-dot" aria-hidden="true"></span>Active</span></p>
+                        <h3><span class="material-symbols-outlined" aria-hidden="true">database</span>Career Intelligence</h3>
+                        <p>Tracking technology companies, roles, skills, events and industry trends.</p>
+                        <p class="focus-meta">Stage: tracking weekly</p>
+                    </li>
+                    <li class="focus-card reveal">
+                        <p class="focus-top"><span>Focus 04</span><span class="focus-live"><span class="status-dot" aria-hidden="true"></span>Active</span></p>
+                        <h3><span class="material-symbols-outlined" aria-hidden="true">school</span>University Preparation</h3>
+                        <p>Getting ready to start Computer Science and Design at SUTD.</p>
+                        <p class="focus-meta">Stage: preparing</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
         <!-- ========== Contact ========== -->
         <section id="contact" class="section section-alt contact">
             <div class="container">
-                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">mail</span>Let's talk</h2>
-                <p>I'm looking for opportunities in AI, data science and cloud computing. The best way to reach me is by email.</p>
+                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">mail</span>Let's build something interesting</h2>
+                <p>Interested in technology, AI, data, cybersecurity, or building something useful? I'm looking for opportunities in these areas. Let's connect.</p>
             </div>
 
             <!-- Email marquee: works the same way as the SUTD strip. The whole strip is one link,
@@ -549,6 +919,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="https://github.com/jajishnu2006-spec" target="_blank" rel="noopener" aria-label="See my code on GitHub">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                    </li>
+                    <li>
                         <a href="mailto:j.a.jishnu2006@gmail.com" aria-label="Email me">
                             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
                         </a>
@@ -556,8 +931,9 @@
                 </ul>
 
                 <!-- ---------- Question form ---------- -->
-                <!-- Plain HTML, no JavaScript: action="mailto:..." tells the browser to open the visitor's
-                     email app, and enctype="text/plain" puts the answers into the email as readable text. -->
+                <!-- Works without JavaScript: action="mailto:..." tells the browser to open the visitor's
+                     email app, and enctype="text/plain" puts the answers into the email as readable text.
+                     With JavaScript on, script.js checks the fields first and shows friendly messages. -->
                 <form class="contact-form" id="contact-form" action="mailto:j.a.jishnu2006@gmail.com?subject=Question%20from%20your%20portfolio" method="post" enctype="text/plain">
                     <h3>Have a question?</h3>
                     <p class="form-intro">Fill this in and I'll get back to you. Fields marked <span class="required-mark">*</span> are required.</p>
@@ -590,6 +966,9 @@
 
                     <button type="submit" class="btn btn-primary">Send message<span class="material-symbols-outlined" aria-hidden="true">mail</span></button>
                     <p class="form-note">This opens your email app with your message ready to send.</p>
+
+                    <!-- Success and error messages from script.js appear here -->
+                    <div class="form-status" role="status" aria-live="polite"></div>
                 </form>
             </div>
         </section>
@@ -597,8 +976,20 @@
     </main>
 
     <footer class="site-footer">
-        <p>&copy; 2026 J.A. Jishnu</p>
+        <p class="footer-brand">J.A. Jishnu</p>
+        <p class="footer-tagline">AI &middot; Data &middot; Cloud &middot; Cybersecurity</p>
+        <ul class="footer-links">
+            <li><a href="https://www.linkedin.com/in/j-a-jishnu/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://github.com/jajishnu2006-spec" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="mailto:j.a.jishnu2006@gmail.com">Email</a></li>
+        </ul>
+        <p>&copy; 2026 J.A. Jishnu. Built with curiosity and code.</p>
     </footer>
+
+    <!-- Appears once you scroll down (script.js) -->
+    <a href="#home" class="back-to-top" aria-label="Back to top">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span>
+    </a>
 
 </body>
 </html>
