@@ -756,10 +756,6 @@ cite {
   object-position: center;
 }
 
-.PUS-red:hover {
-background-color: red;
-}
-  
 /* A wide photo placed under a grid */
 .photo-wide-after {
   margin-top: 1.25rem;
