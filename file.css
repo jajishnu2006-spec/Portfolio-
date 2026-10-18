@@ -2223,3 +2223,17 @@ summary:focus-visible,
 html:has(.cert-modal[open]) {
   overflow: hidden;
 }
+
+/* Achievements: every card has a photo, kept at the bottom so the photos line up across a row */
+#achievements .card {
+  display: flex;
+  flex-direction: column;
+}
+
+#achievements .card-photo {
+  margin-top: auto;
+}
+
+#achievements .card > p:last-of-type {
+  margin-bottom: 1rem;
+}
