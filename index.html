@@ -419,40 +419,6 @@
             </dialog>
         </section>
 
-        <!-- ========== How I approach problems ========== -->
-        <section id="approach" class="section section-alt">
-            <div class="container">
-                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">route</span>How I approach problems</h2>
-
-                <ol class="process" data-stagger>
-                    <li class="process-step reveal">
-                        <span class="process-icon material-symbols-outlined" aria-hidden="true">lightbulb</span>
-                        <p class="process-number">01</p>
-                        <h3>Understand</h3>
-                        <p>Break the problem down and work out what actually matters.</p>
-                    </li>
-                    <li class="process-step reveal">
-                        <span class="process-icon material-symbols-outlined" aria-hidden="true">search</span>
-                        <p class="process-number">02</p>
-                        <h3>Research</h3>
-                        <p>Find the relevant information, the constraints, and people who know more than I do.</p>
-                    </li>
-                    <li class="process-step reveal">
-                        <span class="process-icon material-symbols-outlined" aria-hidden="true">build</span>
-                        <p class="process-number">03</p>
-                        <h3>Build</h3>
-                        <p>Create a practical solution, even if the first version is rough.</p>
-                    </li>
-                    <li class="process-step reveal">
-                        <span class="process-icon material-symbols-outlined" aria-hidden="true">autorenew</span>
-                        <p class="process-number">04</p>
-                        <h3>Iterate</h3>
-                        <p>Test it, learn from feedback, and improve.</p>
-                    </li>
-                </ol>
-            </div>
-        </section>
-
         <!-- ========== Experience ========== -->
         <section id="experience" class="section">
             <div class="container">
@@ -742,7 +708,6 @@
                         <p class="card-label">Academic</p>
                         <h3>Bronze, Singapore Physics League 2024</h3>
                         <p>Senior Category, with my team The Faradays Five. Also competed in the SASMO Math Olympiad and the SJChO Chemistry Olympiad.</p>
-                        <img class="card-photo" src="images/web/physics-league-cert.jpg" alt="Certificate awarding Jagannathan Aruljothi Jishnu, team The Faradays Five, Bronze in the Senior Category of the 4th Singapore Physics League 2024" loading="lazy">
                     </article>
 
                     <article class="card reveal">
@@ -755,6 +720,13 @@
                         <p class="card-label">Public speaking</p>
                         <h3>Master of Ceremonies, 2024</h3>
                         <p>Hosted the TMJC Open House and JC1 Orientation.</p>
+                    </article>
+
+                    <article class="card reveal">
+                        <p class="card-label">Service</p>
+                        <h3>Service Award (Distinction), 2024</h3>
+                        <p>Presented by Tampines Meridian Junior College to me as a Student Councillor, for outstanding contributions to the Student Council.</p>
+                        <img class="card-photo" src="images/web/cert-tmjc-service-award.jpg" alt="Tampines Meridian Junior College Service Award (Distinction) presented to Jagannathan Aruljothi Jishnu, Student Councillor, 11 October 2024" loading="lazy">
                     </article>
 
                     <article class="card reveal">
@@ -818,29 +790,161 @@
                         <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">workspace_premium</span>Certifications</h2>
                         <ul class="row-list">
                             <li>
+                                <span class="row-name">Critical Thinking for Better Judgment and Decision-Making</span>
+                                <span class="row-meta">LinkedIn Learning &middot; Mar 2025</span>
+                            </li>
+                            <li>
+                                <span class="row-name">What Is Business Analysis?</span>
+                                <span class="row-meta">LinkedIn Learning &middot; Mar 2025</span>
+                            </li>
+                            <li>
                                 <span class="row-name">Introduction to LLM</span>
                                 <span class="row-meta">Google Cloud &middot; Feb 2025</span>
                             </li>
                             <li>
                                 <span class="row-name">Azure Course</span>
-                                <span class="row-meta"> &middot; Jul 2024</span>
+                                <span class="row-meta">Great Learning Academy &middot; Jul 2024</span>
                             </li>
                             <li>
                                 <span class="row-name">Introduction to Personal Investing</span>
-                                <span class="row-meta">FinLearn Academy &middot; May 2024</span>
+                                <span class="row-meta">FinLearn Academy &middot; Jul 2024</span>
+                            </li>
+                            <li>
+                                <span class="row-name">Financial Planning Begins Now</span>
+                                <span class="row-meta">FinLearn Academy &middot; Jul 2024</span>
+                            </li>
+                            <li>
+                                <span class="row-name">Introduction to Generative AI</span>
+                                <span class="row-meta">Google Cloud &middot; Apr 2024</span>
                             </li>
                             <li>
                                 <span class="row-name">Data Bootcamp</span>
                                 <span class="row-meta">Temasek Polytechnic &middot; Jul 2021</span>
                             </li>
                         </ul>
-
-                        <figure class="cert-photo">
-                            <img src="images/web/azure-course-cert.jpg" alt="Great Learning Academy certificate of completion for the Azure Course, awarded to Jagannathan Aruljothi Jishnu in July 2024" loading="lazy">
-                            <figcaption>Azure Course certificate of completion</figcaption>
-                        </figure>
                     </div>
                 </div>
+
+                <!-- ---------- Certificate gallery ---------- -->
+                <!-- data-cert-category must match a button's data-cert-filter. Clicking a card opens the full certificate (script.js). -->
+                <div class="cert-gallery">
+                    <h3 class="cert-gallery-title"><span class="material-symbols-outlined" aria-hidden="true">workspace_premium</span>Certificates &amp; awards</h3>
+
+                    <div class="pill-group" aria-label="Filter certificates">
+                        <button class="pill-btn" type="button" data-cert-filter="all" aria-pressed="true">All</button>
+                        <button class="pill-btn" type="button" data-cert-filter="tech" aria-pressed="false">Tech &amp; AI</button>
+                        <button class="pill-btn" type="button" data-cert-filter="finance" aria-pressed="false">Finance</button>
+                        <button class="pill-btn" type="button" data-cert-filter="awards" aria-pressed="false">Awards &amp; events</button>
+                    </div>
+
+                    <ul class="cert-grid">
+                    <li class="cert-card" data-cert-category="tech">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/cert-critical-thinking.jpg" alt="LinkedIn Learning certificate of completion for Critical Thinking for Better Judgment and Decision-Making, completed by J.A. Jishnu on 13 March 2025" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">LinkedIn Learning</span>
+                                <span class="cert-title">Critical Thinking for Better Judgment and Decision-Making</span>
+                                <span class="cert-date">Mar 2025</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li class="cert-card" data-cert-category="tech">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/cert-business-analysis.jpg" alt="LinkedIn Learning certificate of completion for What Is Business Analysis?, completed by J.A. Jishnu on 13 March 2025" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">LinkedIn Learning</span>
+                                <span class="cert-title">What Is Business Analysis?</span>
+                                <span class="cert-date">Mar 2025</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li class="cert-card" data-cert-category="tech">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/azure-course-cert.jpg" alt="Great Learning Academy certificate of completion for the Azure Course, awarded to Jagannathan Aruljothi Jishnu in July 2024" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">Great Learning Academy</span>
+                                <span class="cert-title">Azure Course</span>
+                                <span class="cert-date">Jul 2024</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li class="cert-card" data-cert-category="tech">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/cert-google-genai.jpg" alt="Google Cloud completion badge for Introduction to Generative AI, earned in April 2024" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">Google Cloud</span>
+                                <span class="cert-title">Introduction to Generative AI</span>
+                                <span class="cert-date">Apr 2024</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li class="cert-card" data-cert-category="finance">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/cert-finlearn-investing.jpg" alt="FinLearn Academy certificate of completion for Introduction to Personal Investing, awarded to Jagannathan Aruljothi Jishnu on 7 July 2024" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">FinLearn Academy</span>
+                                <span class="cert-title">Introduction to Personal Investing</span>
+                                <span class="cert-date">Jul 2024</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li class="cert-card" data-cert-category="finance">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/cert-finlearn-planning.jpg" alt="FinLearn Academy certificate of completion for Financial Planning Begins Now, awarded to Jagannathan Aruljothi Jishnu on 7 July 2024" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">FinLearn Academy</span>
+                                <span class="cert-title">Financial Planning Begins Now</span>
+                                <span class="cert-date">Jul 2024</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li class="cert-card" data-cert-category="awards">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/cert-tmjc-service-award.jpg" alt="Tampines Meridian Junior College Service Award (Distinction) presented to Jagannathan Aruljothi Jishnu, Student Councillor, for outstanding contributions in the Student Council, 11 October 2024" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">Tampines Meridian Junior College</span>
+                                <span class="cert-title">Service Award (Distinction)</span>
+                                <span class="cert-date">Oct 2024</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li class="cert-card" data-cert-category="awards">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/physics-league-cert.jpg" alt="Certificate awarding Jagannathan Aruljothi Jishnu, team The Faradays Five, Bronze in the Senior Category of the 4th Singapore Physics League 2024" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">Singapore Physics League</span>
+                                <span class="cert-title">Bronze, Senior Category</span>
+                                <span class="cert-date">2024</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li class="cert-card" data-cert-category="awards">
+                        <button class="cert-open" type="button" aria-haspopup="dialog">
+                            <span class="cert-thumb"><img src="images/web/cert-pre-u-seminar.jpg" alt="Certificate of participation presented to Jagannathan Aruljothi Jishnu for the Pre-University Seminar, 29 May to 1 June 2023" loading="lazy"></span>
+                            <span class="cert-info">
+                                <span class="card-label">Ministry of Education</span>
+                                <span class="cert-title">Pre-University Seminar 2023</span>
+                                <span class="cert-date">May – Jun 2023</span>
+                            </span>
+                        </button>
+                    </li>
+                    </ul>
+                </div>
+
+                <!-- Full-size certificate pop-up -->
+                <dialog class="project-modal cert-modal" id="cert-modal" aria-labelledby="cert-modal-title">
+                    <button class="modal-close" type="button" aria-label="Close">
+                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                    </button>
+                    <figure class="cert-modal-body">
+                        <img src="" alt="">
+                        <figcaption>
+                            <span class="card-label" id="cert-modal-issuer"></span>
+                            <span class="cert-title" id="cert-modal-title"></span>
+                            <span class="cert-date" id="cert-modal-date"></span>
+                        </figcaption>
+                    </figure>
+                </dialog>
             </div>
         </section>
 
@@ -912,42 +1016,6 @@
                     <li class="reveal"><a class="playground-card" href="javascript/index.html"><h3>Login form<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>A form with a show/hide password button. Practises form handling.</p></a></li>
                     <li class="reveal"><a class="playground-card" href="javascript%20programming/h1%20to%20h6%20button.html"><h3>Heading changer<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>Swaps every h1 for an h6. Practises changing the page with the DOM.</p></a></li>
                     <li class="reveal"><a class="playground-card" href="javascript%20programming/animals%20task.html"><h3>Animal picker<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>Click an animal to show its picture. Practises events and classes.</p></a></li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- ========== Currently building (dashboard) ========== -->
-        <!-- Update the "Last updated" line whenever you change these cards -->
-        <section id="focus" class="section section-dark">
-            <div class="container">
-                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">rocket_launch</span>Currently building</h2>
-                <p class="dashboard-updated">Last updated October 2026</p>
-
-                <ul class="focus-grid" data-stagger>
-                    <li class="focus-card reveal">
-                        <p class="focus-top"><span>Focus 01</span><span class="focus-live"><span class="status-dot" aria-hidden="true"></span>Active</span></p>
-                        <h3><span class="material-symbols-outlined" aria-hidden="true">smart_toy</span>AI &amp; Automation</h3>
-                        <p>Exploring AI agents, automation and practical AI applications.</p>
-                        <p class="focus-meta">Stage: exploring</p>
-                    </li>
-                    <li class="focus-card reveal">
-                        <p class="focus-top"><span>Focus 02</span><span class="focus-live"><span class="status-dot" aria-hidden="true"></span>Active</span></p>
-                        <h3><span class="material-symbols-outlined" aria-hidden="true">code</span>Technical Foundation</h3>
-                        <p>Strengthening Python, GitHub, cloud and data skills.</p>
-                        <p class="focus-meta">Stage: learning by building</p>
-                    </li>
-                    <li class="focus-card reveal">
-                        <p class="focus-top"><span>Focus 03</span><span class="focus-live"><span class="status-dot" aria-hidden="true"></span>Active</span></p>
-                        <h3><span class="material-symbols-outlined" aria-hidden="true">database</span>Career Intelligence</h3>
-                        <p>Tracking technology companies, roles, skills, events and industry trends.</p>
-                        <p class="focus-meta">Stage: tracking weekly</p>
-                    </li>
-                    <li class="focus-card reveal">
-                        <p class="focus-top"><span>Focus 04</span><span class="focus-live"><span class="status-dot" aria-hidden="true"></span>Active</span></p>
-                        <h3><span class="material-symbols-outlined" aria-hidden="true">school</span>University Preparation</h3>
-                        <p>Getting ready to start Computer Science and Design at SUTD.</p>
-                        <p class="focus-meta">Stage: preparing</p>
-                    </li>
                 </ul>
             </div>
         </section>

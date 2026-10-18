@@ -612,3 +612,41 @@ if (canvas && canvas.getContext) {
         }, 1500);
     }
 }
+
+
+// ---------- Certificate gallery: filters and full-size pop-up ----------
+const certButtons = document.querySelectorAll("[data-cert-filter]");
+const certCards = document.querySelectorAll(".cert-card");
+
+certButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const filter = button.dataset.certFilter;
+        certButtons.forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
+        certCards.forEach((card) => {
+            card.hidden = filter !== "all" && card.dataset.certCategory !== filter;
+        });
+    });
+});
+
+const certModal = document.getElementById("cert-modal");
+
+if (certModal) {
+    const bigImage = certModal.querySelector("img");
+
+    document.querySelectorAll(".cert-open").forEach((button) => {
+        button.addEventListener("click", () => {
+            const thumb = button.querySelector("img");
+            bigImage.src = thumb.src;
+            bigImage.alt = thumb.alt;
+            document.getElementById("cert-modal-issuer").innerHTML = button.querySelector(".card-label").innerHTML;
+            document.getElementById("cert-modal-title").textContent = button.querySelector(".cert-title").textContent;
+            document.getElementById("cert-modal-date").textContent = button.querySelector(".cert-date").textContent;
+            certModal.showModal();
+        });
+    });
+
+    certModal.querySelector(".modal-close").addEventListener("click", () => certModal.close());
+    certModal.addEventListener("click", (event) => {
+        if (event.target === certModal) certModal.close();
+    });
+}
