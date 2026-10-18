@@ -5,24 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J.A. Jishnu | Portfolio</title>
     <meta name="description" content="Portfolio of J.A. Jishnu, an incoming SUTD Computer Science and Design student in Singapore interested in AI, data science, cloud computing and cybersecurity.">
+    <meta name="author" content="J.A. Jishnu">
+    <!-- Link previews (LinkedIn, WhatsApp, X). TODO: once the live address is known, also add
+         <meta property="og:url"> and an absolute <meta property="og:image"> (a 1200x630 picture), because
+         those sites need the full https:// address of the image. -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="J.A. Jishnu">
+    <meta property="og:title" content="J.A. Jishnu | Portfolio">
+    <meta property="og:description" content="Incoming SUTD Computer Science and Design student interested in AI, data, cloud and cybersecurity. Projects, experience and National Service.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="J.A. Jishnu | Portfolio">
+    <meta name="twitter:description" content="Incoming SUTD Computer Science and Design student interested in AI, data, cloud and cybersecurity.">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
     <!-- Phone / app settings -->
     <meta name="theme-color" content="#FAFAF8"> <!-- colours the phone's browser bar to match the page -->
     <link rel="apple-touch-icon" href="images/favicon.jpg"> <!-- icon used when saved to an iPhone home screen -->
     <meta name="apple-mobile-web-app-title" content="J.A. Jishnu"> <!-- name under that home-screen icon -->
     <!-- Google Material Symbols: only the icons listed in icon_names are downloaded (names must stay in A-Z order) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=arrow_downward,arrow_forward,arrow_upward,autorenew,bolt,build,check_circle,close,cloud,code,database,emoji_events,error,folder_open,interests,lightbulb,mail,menu_book,military_tech,open_in_new,person,photo_library,psychology,rocket_launch,route,school,search,security,smart_toy,sports_basketball,terminal,translate,work,workspace_premium&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=arrow_downward,arrow_forward,arrow_upward,autorenew,bolt,build,check_circle,close,cloud,code,dark_mode,database,download,emoji_events,error,folder_open,interests,light_mode,lightbulb,mail,menu_book,military_tech,open_in_new,person,photo_library,psychology,rocket_launch,route,school,search,security,smart_toy,sports_basketball,sports_esports,terminal,translate,work,workspace_premium&display=block">
     <link rel="stylesheet" href="file.css">
     <!-- Tells the CSS that JavaScript is on, so scroll animations only hide things when they can also show them again -->
     <script>document.documentElement.classList.add("js");</script>
+    <!-- Picks light or dark before the page is drawn, so there is no flash: the visitor's saved choice, else their device setting -->
+    <script>
+        (function () {
+            var theme = null;
+            try { theme = localStorage.getItem("theme"); } catch (e) {}
+            if (theme !== "light" && theme !== "dark") {
+                theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
     <script src="script.js" defer></script>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <!-- ========== Header / Navigation ========== -->
     <header class="site-header">
         <nav class="navbar">
             <a href="#home" class="brand">J.A. JISHNU</a>
+
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+                <span class="material-symbols-outlined icon-dark" aria-hidden="true">dark_mode</span>
+                <span class="material-symbols-outlined icon-light" aria-hidden="true">light_mode</span>
+            </button>
 
             <!-- The checkbox remembers whether the mobile menu is open -->
             <input type="checkbox" id="menu-toggle" class="visually-hidden">
@@ -39,11 +67,13 @@
                 <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <!-- Résumé links appear only when the PDF exists (script.js checks) -->
+                <li class="nav-resume-item"><a class="nav-resume" data-resume href="Jishnu-Resume.pdf" download hidden><span class="material-symbols-outlined" aria-hidden="true">download</span>Résumé</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <main id="main" tabindex="-1">
 
         <!-- ========== Hero ========== -->
         <section id="home" class="hero">
@@ -75,6 +105,8 @@
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary">Explore my work<span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span></a>
                         <a href="#contact" class="btn btn-secondary"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Get in touch</a>
+                        <!-- To turn this on, save your résumé as Jishnu-Resume.pdf next to index.html. It stays hidden until the file exists. -->
+                        <a href="Jishnu-Resume.pdf" class="btn btn-secondary" data-resume download hidden><span class="material-symbols-outlined" aria-hidden="true">download</span>Download résumé</a>
                     </div>
 
                     <ul class="social-links hero-social">
@@ -261,7 +293,9 @@
         <!-- ========== Projects ========== -->
         <!-- data-category on each card must match a filter button's data-filter.
              A card can have more than one category, separated by spaces.
-             The .project-more part is hidden on the card and shown in the pop-up. -->
+             The .project-more part is hidden on the card and shown in the pop-up.
+             To add "Live demo" and "Code" buttons to a card, fill in its data-demo and data-github
+             with the full https:// links. Empty ones are simply not shown. -->
         <section id="projects" class="section">
             <div class="container">
                 <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">folder_open</span>Projects</h2>
@@ -276,7 +310,7 @@
 
                 <div class="project-grid reveal">
                     <!-- TODO: check the technologies, contribution and status for College Crack -->
-                    <article class="project-card" data-category="web">
+                    <article class="project-card" data-category="web" data-github="" data-demo="">
                         <p class="card-label">Web &middot; Education</p>
                         <h3>College Crack</h3>
                         <p>A student resource and career guidance platform covering technology, AI/ML, cloud, IT and educational pathways.</p>
@@ -289,13 +323,17 @@
                         <div class="project-more" hidden>
                             <h4>The problem</h4>
                             <p>Students choosing a path into tech find information about AI/ML, cloud and IT courses and careers scattered and confusing.</p>
+                            <h4>The solution</h4>
+                            <p>One platform that gathers guides and career pathways for technology, AI/ML, cloud and IT in one place.</p>
+                            <h4>Tech used</h4>
+                            <p>Web, content design and career research.</p>
                             <h4>My contribution</h4>
                             <p>Planning how the content is organised and writing the guides.</p>
                         </div>
                         <button class="project-open" type="button" aria-haspopup="dialog">View details<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
                     </article>
 
-                    <article class="project-card" data-category="research">
+                    <article class="project-card" data-category="research" data-github="" data-demo="">
                         <p class="card-label">Research &middot; Healthcare</p>
                         <h3>ProAesthetics</h3>
                         <p>A pre-university project exploring solutions for people with lower-limb prosthetics, including bamboo liners, 3D sockets and modular prosthetic shells.</p>
@@ -309,6 +347,10 @@
                         <div class="project-more" hidden>
                             <h4>The problem</h4>
                             <p>Lower-limb prosthetics can be uncomfortable and costly to replace for people with amputations in Singapore.</p>
+                            <h4>The solution</h4>
+                            <p>Explored bamboo liners, 3D-printed sockets and modular prosthetic shells that are more comfortable and sustainable.</p>
+                            <h4>Tech used</h4>
+                            <p>Design research, expert interviews, 3D sockets and sustainable materials.</p>
                             <h4>My contribution</h4>
                             <p>Team leader of 5. I set up expert consultations over Zoom and assigned tasks based on each member's strengths.</p>
                         </div>
@@ -316,7 +358,7 @@
                     </article>
 
                     <!-- TODO: check the technologies and contribution for the tracker -->
-                    <article class="project-card" data-category="ai-data">
+                    <article class="project-card" data-category="ai-data" data-github="" data-demo="">
                         <p class="card-label">AI / Data</p>
                         <h3>Market Intelligence Tracker</h3>
                         <p>A structured system for tracking technology careers and the market: opportunities, companies, skills, events and trends.</p>
@@ -329,13 +371,17 @@
                         <div class="project-more" hidden>
                             <h4>The problem</h4>
                             <p>Information about tech companies, roles, skills and events changes quickly and is spread across many sources.</p>
+                            <h4>The solution</h4>
+                            <p>A structured tracker that keeps opportunities, companies, skills, events and trends in one place.</p>
+                            <h4>Tech used</h4>
+                            <p>Data organisation, research and trend tracking.</p>
                             <h4>My contribution</h4>
                             <p>Designing the tracking structure and keeping it up to date.</p>
                         </div>
                         <button class="project-open" type="button" aria-haspopup="dialog">View details<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
                     </article>
 
-                    <article class="project-card" data-category="cybersecurity">
+                    <article class="project-card" data-category="cybersecurity" data-github="" data-demo="">
                         <p class="card-label">Cybersecurity</p>
                         <h3>Cybersecurity Learning</h3>
                         <p>A collection of cybersecurity learning and certification work, including ISC2 Certified in Cybersecurity.</p>
@@ -346,8 +392,12 @@
                         </ul>
                         <p class="project-status"><span class="status-dot" aria-hidden="true"></span>Ongoing</p>
                         <div class="project-more" hidden>
-                            <h4>The goal</h4>
-                            <p>Building a solid foundation before going deeper into security operations and cloud security.</p>
+                            <h4>The problem</h4>
+                            <p>Going into security operations and cloud security needs a solid foundation first.</p>
+                            <h4>The solution</h4>
+                            <p>A steady study plan that moves from certification (ISC2 CC) into security operations concepts.</p>
+                            <h4>Tech used</h4>
+                            <p>ISC2 CC material, security fundamentals and SOC concepts.</p>
                             <h4>My contribution</h4>
                             <p>Self-directed study, notes and certification preparation.</p>
                         </div>
@@ -849,6 +899,23 @@
             </div>
         </section>
 
+        <!-- ========== Playground (small JavaScript practice projects) ========== -->
+        <section id="playground" class="section">
+            <div class="container">
+                <h2 class="section-title"><span class="section-icon material-symbols-outlined" aria-hidden="true">sports_esports</span>Playground</h2>
+                <p class="playground-intro">Small JavaScript projects I made while learning. They are rough on purpose: each one practises a single idea. Try them out.</p>
+
+                <ul class="playground-grid" data-stagger>
+                    <li class="reveal"><a class="playground-card" href="javascript/calculator.html"><h3>Calculator<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>Takes two numbers and does the maths. Practises reading inputs.</p></a></li>
+                    <li class="reveal"><a class="playground-card" href="javascript%20programming/guess%20and%20check.html"><h3>Guess the number<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>A small game with a score. Practises variables, conditions and random numbers.</p></a></li>
+                    <li class="reveal"><a class="playground-card" href="javascript/menu.html"><h3>Cut, copy and paste menu<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>A pop-up menu for a text editor. Practises showing and hiding elements.</p></a></li>
+                    <li class="reveal"><a class="playground-card" href="javascript/index.html"><h3>Login form<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>A form with a show/hide password button. Practises form handling.</p></a></li>
+                    <li class="reveal"><a class="playground-card" href="javascript%20programming/h1%20to%20h6%20button.html"><h3>Heading changer<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>Swaps every h1 for an h6. Practises changing the page with the DOM.</p></a></li>
+                    <li class="reveal"><a class="playground-card" href="javascript%20programming/animals%20task.html"><h3>Animal picker<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></h3><p>Click an animal to show its picture. Practises events and classes.</p></a></li>
+                </ul>
+            </div>
+        </section>
+
         <!-- ========== Currently building (dashboard) ========== -->
         <!-- Update the "Last updated" line whenever you change these cards -->
         <section id="focus" class="section section-dark">
@@ -931,10 +998,13 @@
                 </ul>
 
                 <!-- ---------- Question form ---------- -->
+                <!-- To send messages straight to your inbox without opening an email app: get a free access key
+                     at web3forms.com (enter j.a.jishnu2006@gmail.com) and paste it into data-web3forms-key below.
+                     While the key is empty, the form opens the visitor's email app instead. -->
                 <!-- Works without JavaScript: action="mailto:..." tells the browser to open the visitor's
                      email app, and enctype="text/plain" puts the answers into the email as readable text.
                      With JavaScript on, script.js checks the fields first and shows friendly messages. -->
-                <form class="contact-form" id="contact-form" action="mailto:j.a.jishnu2006@gmail.com?subject=Question%20from%20your%20portfolio" method="post" enctype="text/plain">
+                <form class="contact-form" id="contact-form" data-web3forms-key="" action="mailto:j.a.jishnu2006@gmail.com?subject=Question%20from%20your%20portfolio" method="post" enctype="text/plain">
                     <h3>Have a question?</h3>
                     <p class="form-intro">Fill this in and I'll get back to you. Fields marked <span class="required-mark">*</span> are required.</p>
 

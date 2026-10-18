@@ -22,13 +22,63 @@
 
   --clr-text-primary: #111111;  /* headings */
   --clr-text-secondary: #555555;/* body text */
-  --clr-text-muted: #8A8A8A;    /* captions, dates, labels */
+  --clr-text-muted: #6B6B6B;    /* captions, dates, labels (darkened for readable contrast) */
 
   --clr-accent: #2F4F3A;        /* links, buttons (deep forest green) */
   --clr-accent-hover: #1E3527;  /* accent on hover */
 
   --clr-white: #FFFFFF;
   --clr-black: #0A0A0A;
+
+  --clr-card: #FFFFFF;          /* cards, inputs and pop-ups */
+  --clr-on-accent: #FFFFFF;     /* text that sits on an accent-coloured background */
+  --clr-accent-tint: var(--clr-accent-tint);
+  --clr-accent-ring: var(--clr-accent-ring);
+  --clr-error: #B3261E;
+  --clr-success-text: #1E3527;
+  --clr-success-bg: #E7F2EA;
+  --clr-error-text: #8C1D18;
+  --clr-error-bg: #FBEAEA;
+  color-scheme: light;
+}
+
+/*--------------- Dark theme ---------------*/
+/* script.js sets data-theme="dark" on <html> from the visitor's saved choice or their device setting */
+:root[data-theme="dark"] {
+  --clr-bg: #0F1411;
+  --clr-surface: #161D18;
+  --clr-border: #2A332D;
+
+  --clr-text-primary: #F1F2EE;
+  --clr-text-secondary: #C2CAC4;
+  --clr-text-muted: #98A59D;
+
+  --clr-accent: #86D6A0;
+  --clr-accent-hover: #A6E6BC;
+
+  --clr-card: #1A221D;
+  --clr-on-accent: #0E1A12;
+  --clr-accent-tint: rgba(134, 214, 160, 0.14);
+  --clr-accent-ring: rgba(134, 214, 160, 0.3);
+  --clr-error: #F2877F;
+  --clr-success-text: #CDEED8;
+  --clr-success-bg: #1C3326;
+  --clr-error-text: #F8C9C5;
+  --clr-error-bg: #3A1D1B;
+  color-scheme: dark;
+}
+
+/* Lighter versions of the nav hover colours so they stay readable on the dark background */
+:root[data-theme="dark"] .nav-items li:nth-child(1) a { --hover-clr: #86D6A0; }
+:root[data-theme="dark"] .nav-items li:nth-child(2) a { --hover-clr: #E39A74; }
+:root[data-theme="dark"] .nav-items li:nth-child(3) a { --hover-clr: #6DB6E8; }
+:root[data-theme="dark"] .nav-items li:nth-child(4) a { --hover-clr: #E3B04A; }
+:root[data-theme="dark"] .nav-items li:nth-child(5) a { --hover-clr: #F2877F; }
+:root[data-theme="dark"] .nav-items li:nth-child(6) a { --hover-clr: #B896E8; }
+:root[data-theme="dark"] .nav-items li:nth-child(7) a { --hover-clr: #4FD1C5; }
+
+:root[data-theme="dark"] img {
+  filter: brightness(0.92);
 }
 
 /*--------------- Base ---------------*/
@@ -238,7 +288,7 @@ a:focus-visible,
 
 .btn-primary {
   background-color: var(--clr-accent);
-  color: var(--clr-white);
+  color: var(--clr-on-accent);
 }
 
 .btn-primary:hover {
@@ -534,7 +584,7 @@ section {
   font-family: var(--ff-secondary);
   font-size: 0.9rem;
   color: var(--clr-text-primary);
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 999px;
 }
@@ -826,7 +876,7 @@ background-color: red;
 
 .card {
   padding: 1.5rem;
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 12px;
 }
@@ -932,14 +982,14 @@ background-color: red;
   width: 3.25rem;
   height: 3.25rem;
   color: var(--clr-accent);
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 50%;
   transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .social-links a:hover {
-  color: var(--clr-white);
+  color: var(--clr-on-accent);
   background-color: var(--clr-accent);
   transform: translateY(-2px);
 }
@@ -956,7 +1006,7 @@ background-color: red;
   margin: 3rem auto 0;
   padding: 2rem;
   text-align: left;
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 16px;
 }
@@ -1001,7 +1051,7 @@ background-color: red;
 
 /* Red star next to required fields */
 .required-mark {
-  color: #B3261E;
+  color: var(--clr-error);
   font-weight: 700;
 }
 
@@ -1029,7 +1079,7 @@ background-color: red;
 .form-field textarea:focus {
   outline: none;
   border-color: var(--clr-accent);
-  box-shadow: 0 0 0 3px rgba(47, 79, 58, 0.15);
+  box-shadow: 0 0 0 3px var(--clr-accent-ring);
 }
 
 .contact-form button {
@@ -1160,7 +1210,7 @@ background-color: red;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--clr-text-primary);
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 999px;
 }
@@ -1261,7 +1311,7 @@ background-color: red;
 
 .value-card {
   padding: 1.4rem;
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 12px;
 }
@@ -1305,7 +1355,7 @@ background-color: red;
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--clr-text-primary);
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 999px;
   cursor: pointer;
@@ -1318,7 +1368,7 @@ background-color: red;
 
 .pill-btn[aria-selected="true"],
 .pill-btn[aria-pressed="true"] {
-  color: var(--clr-white);
+  color: var(--clr-on-accent);
   background-color: var(--clr-accent);
   border-color: var(--clr-accent);
 }
@@ -1341,7 +1391,7 @@ background-color: red;
 
 .interest-list li {
   padding: 1.1rem 1.2rem;
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 12px;
 }
@@ -1381,7 +1431,7 @@ background-color: red;
   flex-direction: column;
   gap: 0.75rem;
   padding: 1.75rem;
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 16px;
 }
@@ -1458,7 +1508,7 @@ background-color: red;
   margin: auto;
   padding: 0;
   color: var(--clr-text-secondary);
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 16px;
   box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.35);
@@ -1495,7 +1545,7 @@ html:has(.project-modal[open]) {
   height: 2.75rem;
   margin: 0.75rem 0.75rem 0 0;
   color: var(--clr-text-primary);
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 50%;
   cursor: pointer;
@@ -1551,7 +1601,7 @@ html:has(.project-modal[open]) {
 .process-step {
   position: relative;
   padding: 1.5rem;
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 12px;
 }
@@ -1586,7 +1636,7 @@ html:has(.project-modal[open]) {
   height: 2.25rem;
   font-size: 1.25rem;
   color: var(--clr-accent);
-  background-color: rgba(47, 79, 58, 0.1);
+  background-color: var(--clr-accent-tint);
   border-radius: 10px;
 }
 
@@ -1615,7 +1665,7 @@ html:has(.project-modal[open]) {
 /*--------------- Skills ---------------*/
 .skill-card {
   padding: 1.5rem;
-  background-color: var(--clr-white);
+  background-color: var(--clr-card);
   border: 1px solid var(--clr-border);
   border-radius: 12px;
 }
@@ -1637,13 +1687,13 @@ html:has(.project-modal[open]) {
   height: 2.25rem;
   font-size: 1.25rem;
   color: var(--clr-accent);
-  background-color: rgba(47, 79, 58, 0.1);
+  background-color: var(--clr-accent-tint);
   border-radius: 10px;
   transition: background-color 0.25s, color 0.25s;
 }
 
 .skill-card:hover .skill-icon {
-  color: var(--clr-white);
+  color: var(--clr-on-accent);
   background-color: var(--clr-accent);
 }
 
@@ -1746,11 +1796,11 @@ html:has(.project-modal[open]) {
 .contact .contact-form .field-error {
   display: block;
   font-size: 0.85rem;
-  color: #B3261E;
+  color: var(--clr-error);
 }
 
 .form-field [aria-invalid="true"] {
-  border-color: #B3261E;
+  border-color: var(--clr-error);
 }
 
 .form-status {
@@ -1768,13 +1818,13 @@ html:has(.project-modal[open]) {
 }
 
 .form-status.is-success {
-  color: #1E3527;
-  background-color: #E7F2EA;
+  color: var(--clr-success-text);
+  background-color: var(--clr-success-bg);
 }
 
 .form-status.is-error {
-  color: #8C1D18;
-  background-color: #FBEAEA;
+  color: var(--clr-error-text);
+  background-color: var(--clr-error-bg);
 }
 
 /*--------------- Back to top button ---------------*/
@@ -1787,7 +1837,7 @@ html:has(.project-modal[open]) {
   place-items: center;
   width: 3rem;
   height: 3rem;
-  color: var(--clr-white);
+  color: var(--clr-on-accent);
   background-color: var(--clr-accent);
   border-radius: 50%;
   box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.4);
@@ -1873,4 +1923,172 @@ html:has(.project-modal[open]) {
   .section-title {
     margin-bottom: 1.5rem;
   }
+}
+
+/*--------------- Theme toggle (light / dark) ---------------*/
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-left: auto; /* pushes it (and the menu button) to the right of the name */
+  color: var(--clr-accent);
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--clr-surface);
+}
+
+/* Show the moon in light mode and the sun in dark mode */
+.theme-toggle .icon-light { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-light { display: inline; }
+:root[data-theme="dark"] .theme-toggle .icon-dark { display: none; }
+
+@media (min-width: 1024px) {
+  .nav-items { order: 1; margin-left: auto; }
+  .theme-toggle { order: 2; margin-left: 1rem; }
+}
+
+/*--------------- Keyboard focus and skip link ---------------*/
+/* One clear outline for everything you can tab to */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+.btn:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  font-family: var(--ff-secondary);
+  font-weight: 500;
+  color: var(--clr-on-accent);
+  background-color: var(--clr-accent);
+  border-radius: 8px;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/*--------------- Résumé buttons ---------------*/
+/* Hidden until script.js finds the PDF (see the comment above the hero buttons in index.html) */
+.nav-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.nav-resume .material-symbols-outlined {
+  font-size: 1.1rem;
+}
+
+/*--------------- Project links ---------------*/
+.project-links {
+  position: relative;
+  z-index: 1; /* above the invisible "View details" layer, so the links can be clicked */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--ff-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.project-links .material-symbols-outlined {
+  font-size: 1.1rem;
+}
+
+.project-flow {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+}
+
+/*--------------- Playground ---------------*/
+.playground-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.playground-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  padding: 1.25rem;
+  color: inherit;
+  text-decoration: none;
+  background-color: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.playground-card:hover,
+.playground-card:focus-visible {
+  border-color: var(--clr-accent);
+  transform: translateY(-3px);
+}
+
+.playground-card h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  color: var(--clr-text-primary);
+}
+
+.playground-card h3 .material-symbols-outlined {
+  font-size: 1.1rem;
+  color: var(--clr-accent);
+}
+
+.playground-card p {
+  font-size: 0.92rem;
+}
+
+.playground-intro {
+  max-width: 60ch;
+  margin: -0.5rem 0 1.75rem;
+}
+
+/* The résumé link is skipped in the nav on mid-size screens where the links are already tight */
+.nav-resume-item { display: contents; }
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .nav-resume-item { display: none; }
+}
+.nav-items li:nth-child(8) a { --hover-clr: var(--clr-accent); }
+
+/* The marquee's green is too dark to read on the dark background */
+:root[data-theme="dark"] .marquee-track { color: #5FC77E; }
+
+/* Desktop: name on the left, links and the theme button on the right, all on one line */
+@media (min-width: 1024px) {
+  .navbar { column-gap: 1.25rem; flex-wrap: nowrap; }
+  .nav-items { gap: 1.5rem; }
 }

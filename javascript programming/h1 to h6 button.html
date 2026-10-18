@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Heading one</h1>
+  <h1>Heading two</h1>
+  <h1>Heading three</h1>
+  <button onclick="changeHeadings()">Change to h6</button>
+
+  <script>
+    function changeHeadings() {
+      let allH1 = document.querySelectorAll("h1");
+      allH1.forEach(function (oldHeading) {
+        let newHeading = document.createElement("h6");
+        newHeading.innerHTML = oldHeading.innerHTML;
+        oldHeading.replaceWith(newHeading);
+      });
+    }
+  </script>
+</body>
+</html>

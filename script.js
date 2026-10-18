@@ -10,6 +10,75 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 const hasMouse = window.matchMedia("(pointer: fine)").matches;
 
 
+// ---------- Light / dark theme ----------
+// The first choice is made by a small script in <head> (so the page never flashes the wrong colours)
+const themeToggle = document.getElementById("theme-toggle");
+const themeColour = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme, save) {
+    document.documentElement.setAttribute("data-theme", theme);
+    if (themeToggle) {
+        themeToggle.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+    }
+    // colours the phone's browser bar to match
+    if (themeColour) themeColour.setAttribute("content", theme === "dark" ? "#0F1411" : "#FAFAF8");
+    if (save) {
+        try { localStorage.setItem("theme", theme); } catch (e) { /* private mode: just don't remember it */ }
+    }
+    document.dispatchEvent(new Event("themechange"));
+}
+
+applyTheme(document.documentElement.getAttribute("data-theme") || "light", false);
+
+if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+        const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        applyTheme(next, true);
+    });
+}
+
+
+// ---------- Résumé buttons: shown only if the PDF has been added ----------
+const resumeLinks = document.querySelectorAll("[data-resume]");
+
+if (resumeLinks.length && location.protocol.startsWith("http")) {
+    fetch(resumeLinks[0].getAttribute("href"), { method: "HEAD" })
+        .then((response) => {
+            const isPdf = (response.headers.get("content-type") || "").includes("pdf");
+            if (response.ok && isPdf) resumeLinks.forEach((link) => (link.hidden = false));
+        })
+        .catch(() => { /* no file: the buttons stay hidden */ });
+}
+
+
+// ---------- Project cards: "Live demo" and "Code" links ----------
+// Filled in from data-demo and data-github on each card. Empty ones are skipped.
+document.querySelectorAll(".project-card").forEach((card) => {
+    const links = [
+        { url: card.dataset.demo, label: "Live demo", icon: "open_in_new" },
+        { url: card.dataset.github, label: "Code", icon: "code" },
+    ].filter((link) => link.url);
+    if (!links.length) return;
+
+    const list = document.createElement("div");
+    list.className = "project-links";
+    links.forEach((link) => {
+        const a = document.createElement("a");
+        a.href = link.url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.append(link.label);
+        const icon = document.createElement("span");
+        icon.className = "material-symbols-outlined";
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = link.icon;
+        a.append(icon);
+        list.append(a);
+    });
+    card.querySelector(".project-open").before(list);
+});
+
+
 // ---------- Stagger: items in a [data-stagger] group appear one after another ----------
 document.querySelectorAll("[data-stagger]").forEach((group) => {
     [...group.children].forEach((child, i) => child.style.setProperty("--i", i));
@@ -278,6 +347,41 @@ if (form) {
         }
 
         const data = new FormData(form);
+        const accessKey = form.dataset.web3formsKey;
+
+        // With an access key, send straight to the inbox without opening an email app
+        if (accessKey) {
+            const button = form.querySelector('button[type="submit"]');
+            button.disabled = true;
+            setStatus("success", "Sending...");
+
+            fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({
+                    access_key: accessKey,
+                    subject: "Question from your portfolio: " + data.get("Topic"),
+                    name: data.get("Name"),
+                    email: data.get("Email"),
+                    topic: data.get("Topic"),
+                    message: data.get("Message"),
+                }),
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    if (!result.success) throw new Error(result.message);
+                    form.reset();
+                    setStatus("success", "Thanks, " + data.get("Name").split(" ")[0] + "! Your message has been sent. I'll reply by email.");
+                })
+                .catch(() => {
+                    setStatus("error", "Sorry, that didn't send. Please email me at " + emailTo + " instead.");
+                })
+                .finally(() => {
+                    button.disabled = false;
+                });
+            return;
+        }
+
         const subject = "Question from your portfolio: " + data.get("Topic");
         const body =
             "Name: " + data.get("Name") + "\n" +
@@ -314,18 +418,34 @@ if (hasMouse && !reduceMotion) {
 
 
 // ---------- Hero network: floating dots joined by lines ----------
-// Dots near each other are joined by faint lines. On a computer, dots near the mouse join to it too.
+// Dots near each other are joined by faint lines. Move the pointer over the hero to push the dots
+// around and draw lines to them, and click (or tap) an empty spot to release a burst of new dots.
 const canvas = document.querySelector(".hero-network");
 
 if (canvas && canvas.getContext) {
     const ctx = canvas.getContext("2d");
-    const colour = getComputedStyle(document.documentElement).getPropertyValue("--clr-accent").trim() || "#2F4F3A";
-    const linkDistance = 130; // how close two dots must be to get a line
+    const root = document.documentElement;
+    let colour = "#2F4F3A";
+    const linkDistance = 130;   // how close two dots must be to get a line
+    const pushRadius = 110;     // dots closer than this to the pointer get pushed away
+    const maxDots = 130;        // bursts never take the total above this
     let width = 0;
     let height = 0;
     let dots = [];
+    let baseCount = 0;
     let mouse = null;
     let running = false;
+
+    function readColour() {
+        colour = getComputedStyle(root).getPropertyValue("--clr-accent").trim() || colour;
+    }
+
+    function makeDot(x, y, speed) {
+        const angle = Math.random() * Math.PI * 2;
+        const pace = speed * (0.4 + Math.random() * 0.6);
+        // bx, by: the dot's own drifting speed. vx, vy: its speed right now (a push changes it, then it settles back)
+        return { x, y, bx: Math.cos(angle) * pace, by: Math.sin(angle) * pace, vx: Math.cos(angle) * pace, vy: Math.sin(angle) * pace, size: 2 };
+    }
 
     function setup() {
         const box = canvas.getBoundingClientRect();
@@ -335,15 +455,11 @@ if (canvas && canvas.getContext) {
         canvas.width = width * ratio;
         canvas.height = height * ratio;
         ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        readColour();
 
         // Fewer dots on small screens, so phones don't slow down
-        const count = Math.round(Math.min(70, (width * height) / 14000));
-        dots = Array.from({ length: count }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-        }));
+        baseCount = Math.round(Math.min(70, (width * height) / 14000));
+        dots = Array.from({ length: baseCount }, () => makeDot(Math.random() * width, Math.random() * height, 0.5));
         draw();
     }
 
@@ -377,9 +493,9 @@ if (canvas && canvas.getContext) {
                 }
             }
 
-            ctx.globalAlpha = 0.55;
+            ctx.globalAlpha = 0.55 + (dot.size - 2) * 0.15;
             ctx.beginPath();
-            ctx.arc(dot.x, dot.y, 2, 0, Math.PI * 2);
+            ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
             ctx.fill();
         });
         ctx.globalAlpha = 1;
@@ -387,11 +503,30 @@ if (canvas && canvas.getContext) {
 
     function move() {
         dots.forEach((dot) => {
+            let targetSize = 2;
+
+            if (mouse) {
+                const dx = dot.x - mouse.x;
+                const dy = dot.y - mouse.y;
+                const distance = Math.hypot(dx, dy) || 1;
+                if (distance < pushRadius) {
+                    const closeness = 1 - distance / pushRadius; // 1 right at the pointer, 0 at the edge
+                    dot.vx += (dx / distance) * closeness * 0.9;
+                    dot.vy += (dy / distance) * closeness * 0.9;
+                    targetSize = 2 + closeness * 2.5; // dots swell as the pointer gets close
+                }
+            }
+
+            // After a push, ease back to the dot's own drifting speed
+            dot.vx = dot.bx + (dot.vx - dot.bx) * 0.94;
+            dot.vy = dot.by + (dot.vy - dot.by) * 0.94;
+            dot.size += (targetSize - dot.size) * 0.15;
+
             dot.x += dot.vx;
             dot.y += dot.vy;
             // Bounce off the edges
-            if (dot.x < 0 || dot.x > width) dot.vx *= -1;
-            if (dot.y < 0 || dot.y > height) dot.vy *= -1;
+            if (dot.x < 0 || dot.x > width) { dot.vx *= -1; dot.bx *= -1; dot.x = Math.min(Math.max(dot.x, 0), width); }
+            if (dot.y < 0 || dot.y > height) { dot.vy *= -1; dot.by *= -1; dot.y = Math.min(Math.max(dot.y, 0), height); }
         });
     }
 
@@ -432,14 +567,48 @@ if (canvas && canvas.getContext) {
         heroOnScreen && !document.hidden ? start() : stop();
     });
 
-    if (hasMouse && !reduceMotion) {
+    // Switching between light and dark changes the dot colour
+    document.addEventListener("themechange", () => {
+        readColour();
+        if (!running) draw();
+    });
+
+    if (!reduceMotion) {
         const stage = canvas.parentElement;
-        stage.addEventListener("pointermove", (event) => {
+
+        if (hasMouse) {
+            stage.addEventListener("pointermove", (event) => {
+                const box = canvas.getBoundingClientRect();
+                mouse = { x: event.clientX - box.left, y: event.clientY - box.top };
+            });
+            stage.addEventListener("pointerleave", () => {
+                mouse = null;
+            });
+        }
+
+        // Click or tap to release a burst of dots. Clicks on links, buttons and the stats are left alone.
+        stage.addEventListener("pointerdown", (event) => {
+            if (event.target.closest("a, button, input, select, textarea")) return;
             const box = canvas.getBoundingClientRect();
-            mouse = { x: event.clientX - box.left, y: event.clientY - box.top };
+            const x = event.clientX - box.left;
+            const y = event.clientY - box.top;
+
+            for (let n = 0; n < 6; n++) {
+                const dot = makeDot(x, y, 0.5);
+                const angle = Math.random() * Math.PI * 2;
+                dot.vx = Math.cos(angle) * 3; // flies outwards, then settles to its slow drift
+                dot.vy = Math.sin(angle) * 3;
+                dots.push(dot);
+            }
+            // Keep the total under the limit by removing the oldest extra dots
+            const extra = dots.length - maxDots;
+            if (extra > 0) dots.splice(0, extra);
+            if (!running) draw();
         });
-        stage.addEventListener("pointerleave", () => {
-            mouse = null;
-        });
+
+        // Extra dots from bursts fade away one at a time, so the hero doesn't fill up
+        setInterval(() => {
+            if (dots.length > baseCount && running) dots.shift();
+        }, 1500);
     }
 }

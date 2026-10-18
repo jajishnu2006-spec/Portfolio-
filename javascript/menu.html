@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cut Copy Paste Menu</title>
+</head>
+
+<body>
+
+    <h2>Text Editor</h2>
+
+    <button onclick="showMenu()">Menu</button>
+
+    <div id="menu" style="display: none;">
+
+        <button onclick="cutText()">Cut</button>
+        <button onclick="copyText()">Copy</button>
+        <button onclick="pasteText()">Paste</button>
+
+    </div>
+
+    <br><br>
+
+    <textarea id="textArea" rows="10" cols="50"
+        placeholder="Type or paste your text here..."></textarea>
+
+    <p id="message"></p>
+
+
+    <script> 
+        // Show / Hide Menu
+function showMenu() {
+
+    let menu = document.getElementById("menu");
+
+    if (menu.style.display === "none") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
+    }
+}
+
+
+// Cut
+function cutText() {
+
+    let textArea = document.getElementById("textArea");
+
+    textArea.focus();
+
+    let selectedText = textArea.value.substring(
+        textArea.selectionStart,
+        textArea.selectionEnd
+    );
+
+    if (selectedText === "") {
+        document.getElementById("message").textContent =
+            "Please select some text first.";
+
+        return;
+    }
+
+    navigator.clipboard.writeText(selectedText);
+
+    let start = textArea.selectionStart;
+    let end = textArea.selectionEnd;
+
+    textArea.value =
+        textArea.value.substring(0, start) +
+        textArea.value.substring(end);
+
+    document.getElementById("message").textContent =
+        "Text cut successfully.";
+}
+
+
+// Copy
+function copyText() {
+
+    let textArea = document.getElementById("textArea");
+
+    let selectedText = textArea.value.substring(
+        textArea.selectionStart,
+        textArea.selectionEnd
+    );
+
+    if (selectedText === "") {
+        document.getElementById("message").textContent =
+            "Please select some text first.";
+
+        return;
+    }
+
+    navigator.clipboard.writeText(selectedText);
+
+    document.getElementById("message").textContent =
+        "Text copied successfully.";
+}
+
+
+// Paste
+async function pasteText() {
+
+    let textArea = document.getElementById("textArea");
+
+    try {
+
+        let text = await navigator.clipboard.readText();
+
+        let start = textArea.selectionStart;
+        let end = textArea.selectionEnd;
+
+        textArea.value =
+            textArea.value.substring(0, start) +
+            text +
+            textArea.value.substring(end);
+
+        document.getElementById("message").textContent =
+            "Text pasted successfully.";
+
+    } catch (error) {
+
+        document.getElementById("message").textContent =
+            "Unable to paste. Please allow clipboard access.";
+
+    }
+}
+    </script>
+
+</body>
+</html>
+
+
+

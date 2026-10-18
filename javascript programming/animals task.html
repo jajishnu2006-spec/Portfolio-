@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    img { width: 200px; height: 150px; object-fit: cover; margin: 5px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <button onclick="showAnimal('lion')">Lion</button>
+  <button onclick="showAnimal('tiger')">Tiger</button>
+  <button onclick="showAnimal('elephant')">Elephant</button>
+
+  <div id="lion" class="hidden">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg">
+  </div>
+
+  <div id="tiger" class="hidden">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Walking_tiger_female.jpg">
+  </div>
+
+  <div id="elephant" class="hidden">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg">
+  </div>
+
+  <script>
+    function showAnimal(animal) {
+      document.getElementById("lion").classList.add("hidden");
+      document.getElementById("tiger").classList.add("hidden");
+      document.getElementById("elephant").classList.add("hidden");
+      document.getElementById(animal).classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            width: 300px;
+            margin: 100px auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        /* Password input container */
+        .password-container {
+            position: relative;
+        }
+
+        /* Eye icon */
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            user-select: none;
+        }
+
+        .password-container input {
+            padding-right: 40px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <h2>Login</h2>
+
+        <!-- Username -->
+        <input 
+            type="text" 
+            id="username" 
+            placeholder="Username"
+        >
+
+        <!-- Password -->
+        <div class="password-container">
+
+            <input 
+                type="password" 
+                id="password" 
+                placeholder="Password"
+            >
+
+            <!-- Eye icon -->
+            <span 
+                class="toggle-password" 
+                id="togglePassword"
+                onclick="togglePasswordVisibility()"
+            >
+                👁️
+            </span>
+
+        </div>
+
+        <button onclick="validateLogin()">Login</button>
+
+        <p id="message"></p>
+
+    </div>
+
+
+    <script>
+
+        // Hide / Show Password
+        function togglePasswordVisibility() {
+
+            const passwordInput = document.getElementById("password");
+            const eyeIcon = document.getElementById("togglePassword");
+
+            if (passwordInput.type === "password") {
+
+                // Show password
+                passwordInput.type = "text";
+
+                // Change icon
+                eyeIcon.textContent = "🙈";
+
+            } else {
+
+                // Hide password
+                passwordInput.type = "password";
+
+                // Change icon
+                eyeIcon.textContent = "👁️";
+            }
+        }
+
+
+        // Username & Password Validation
+        function validateLogin() {
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const message = document.getElementById("message");
+
+            if (username === "") {
+
+                message.textContent = "Please enter your username.";
+                message.style.color = "red";
+                return;
+            }
+
+            if (password === "") {
+
+                message.textContent = "Please enter your password.";
+                message.style.color = "red";
+                return;
+            }
+
+            // Successful validation
+            message.textContent = "Login successful!";
+            message.style.color = "green";
+        }
+
+    </script>
+
+</body>
+</html>
+
