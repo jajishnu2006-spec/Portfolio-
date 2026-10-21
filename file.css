@@ -2233,3 +2233,8 @@ html:has(.cert-modal[open]) {
 #achievements .card > p:last-of-type {
   margin-bottom: 1rem;
 }
+
+/* Skills: four cards sit as a 2 x 2 grid on wider screens, so there are no empty slots */
+#skills .card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+}
